@@ -121,4 +121,73 @@ function calculate() {
         Number(document.getElementById("gravel").value);
 
     let bass =
-        Number(document.getElementById("bass").
+        Number(document.getElementById("bass").value) +
+        Number(document.getElementById("largest").value);
+
+    let total = water + forage + habitat + bass;
+
+    if (total > 100) {
+        total = 100;
+    }
+
+    let grade = "";
+
+    if (total >= 90) {
+        grade = "🏆 Trophy Bass Factory";
+    } else if (total >= 80) {
+        grade = "✅ Excellent";
+    } else if (total >= 65) {
+        grade = "👍 Good";
+    } else if (total >= 50) {
+        grade = "⚠️ Fair";
+    } else {
+        grade = "❌ Needs Work";
+    }
+
+    let lowest = Math.min(water, forage, habitat, bass);
+
+    let factor = "";
+    let recommendation = "";
+
+    if (lowest === forage) {
+        factor = "Forage Base";
+        recommendation = "Increase bluegill forage, feed daily, and consider threadfin shad.";
+    }
+    else if (lowest === habitat) {
+        factor = "Habitat";
+        recommendation = "Add brush piles, stake beds, spawning areas and shoreline cover.";
+    }
+    else if (lowest === water) {
+        factor = "Water Quality";
+        recommendation = "Consider aeration, lime, fertility management and water testing.";
+    }
+    else {
+        factor = "Bass Population";
+        recommendation = "Harvest small bass and increase forage availability.";
+    }
+
+    let trophy = (4 + total / 12).toFixed(1);
+
+    document.getElementById("results").style.display = "block";
+
+    document.getElementById("score").innerHTML = total + "/100";
+
+    document.getElementById("grade").innerHTML =
+        "<strong>Grade:</strong> " + grade;
+
+    document.getElementById("factor").innerHTML =
+        "<strong>Limiting Factor:</strong> " + factor;
+
+    document.getElementById("recommendation").innerHTML =
+        "<strong>Top Recommendation:</strong> " + recommendation;
+
+    document.getElementById("forecast").innerHTML =
+        "<strong>Estimated Trophy Bass Potential:</strong> " +
+        trophy + " lb maximum bass";
+
+}
+
+</script>
+
+</body>
+</html>
