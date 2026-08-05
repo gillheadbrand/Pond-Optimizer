@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Gillhead Pond Optimizer™</title>
+
+<style>
+
+body{
+    font-family:Arial, sans-serif;
+    max-width:900px;
+    margin:auto;
+    background:#f5f7f8;
+    padding:20px;
+}
+
+.container{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+h1{
+    color:#0f5d47;
+}
+
+label{
+    display:block;
+    margin-top:12px;
+    font-weight:bold;
+}
+
+select{
+    width:100%;
+    padding:8px;
+    margin-top:4px;
+}
+
+button{
+    margin-top:20px;
+    padding:14px 20px;
+    border:none;
+    background:#0f5d47;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+    border-radius:6px;
+}
+
+.results{
+    margin-top:25px;
+    display:none;
+}
+
+.score{
+    font-size:42px;
+    color:#0f5d47;
+    font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🐟 Gillhead Pond Optimizer™</h1>
+
+<p>Find what's limiting trophy bass growth.</p>
+
+<label>Aeration</label>
+<select id="aeration">
+<option value="0">No</option>
+<option value="10">Yes</option>
+</select>
+
+<label>Water Clarity</label>
+<select id="clarity">
+<option value="2">Muddy</option>
+<option value="6">Very Clear</option>
+<option value="10">18-30 Inch Bloom</option>
+</select>
+
+<label>Bluegill Population</label>
+<select id="bluegill">
+<option value="2">Poor</option>
+<option value="10">Average</option>
+<option value="20">Excellent</option>
+</select>
+
+<label>Bluegill Feeding Program</label>
+<select id="feed">
+<option value="0">No Feed</option>
+<option value="5">Sometimes</option>
+<option value="10">Daily</option>
+</select>
+
+<label>Threadfin Shad Present</label>
+<select id="shad">
+<option value="0">No</option>
+<option value="10">Yes</option>
+</select>
+
+<label>Brush Piles</label>
+<select id="brush">
+<option value="0">None</option>
+<option value="5">Some</option>
+<option value="10">Many</option>
+</select>
+
+<label>Gravel Beds</label>
+<select id="gravel">
+<option value="0">None</option>
+<option value="5">Some</option>
+<option value="10">Many</option>
+</select>
+
+<label>Bass Condition</label>
+<select id="bass">
+<option value="0">Skinny</option>
+<option value="10">Average</option>
+<option value="20">Fat</option>
+</select>
+
+<label>Largest Bass Caught</label>
+<select id="largest">
+<option value="0">Below 3 lb</option>
+<option value="5">3-5 lb</option>
+<option value="10">5-8 lb</option>
+<option value="15">8-10 lb</option>
+<option value="20">10+ lb</option>
+</select>
+
+<button onclick="calculate()">
+Run Gillhead Audit
+</button>
+
+<div id="results" class="results">
+
+<h2>Results</h2>
+
+<div class="score" id="pondScore"></div>
+
+<p id="grade"></p>
+
+<h3>Category Breakdown</h3>
+
+<p id="water"></p>
+<p id="forage"></p>
+<p id="habitat"></p>
+<p id="bassscore"></p>
+
+<h3>Limiting Factor</h3>
+<p id="factor"></p>
+
+<h3>Top Recommendation</h3>
+<p id="recommendation"></p>
+
+<h3>Trophy Bass Potential</h3>
+<p id="forecast"></p>
+
+</div>
+
+</div>
+
+<script>
+
+function calculate(){
+
+let water =
+(Number(aeration.value) +
+Number(clarity.value));
+
+let forage =
+(Number(bluegill.value) +
+Number(feed.value) +
+Number(shad.value));
+
+let habitat =
+(Number(brush.value) +
+Number(gravel.value));
+
+let bass =
+(Number(document.getElementById("bass").value) +
+Number(largest.value));
+
+let total = water + forage + habitat + bass;
+
+if(total > 100){
+total = 100;
+}
+
+let grade;
+
+if(total >= 90){
+grade = "Trophy Bass Factory";
+}
+else if(total >= 80){
+grade = "Excellent";
+}
+else if(total >= 65){
+grade = "Good";
+}
+else if(total >= 50){
+grade = "Fair";
+}
+else{
+grade = "Needs Work";
+}
+
+let lowest =
+Math.min(water,forage,habitat,bass);
+
+let factor = "";
+let recommendation = "";
+
+if(lowest === forage){
+factor = "Forage Base";
+recommendation =
+"Increase bluegill production, feed daily, and consider threadfin shad.";
+}
+else if(lowest === habitat){
+factor = "Habitat";
+recommendation =
+"Add brush piles, stake beds, gravel spawning areas, and structure.";
+}
+else if(lowest === water){
+factor = "Water Quality";
+recommendation =
+"Evaluate aeration, fertility, alkalinity, and water clarity.";
+}
+else{
+factor = "Bass Population";
+recommendation =
+"Remove small bass and improve forage availability.";
+}
+
+let trophy =
+(4 + total / 12).toFixed(1);
+
+document.getElementById("results").style.display="block";
+
+document.getElementById("pondScore").innerHTML =
+total + " / 100";
+
+document.getElementById("grade").innerHTML =
+"<b>Grade:</b> " + grade;
+
+document.getElementById("water").innerHTML =
+"Water Quality Score: " + water;
+
+document.getElementById("forage").innerHTML =
+"Forage Score: " + forage;
+
+document.getElementById("habitat").innerHTML =
+"Habitat Score: " + habitat;
+
+document.getElementById("bassscore").innerHTML =
+"Bass Population Score: " + bass;
+
+document.getElementById("factor").innerHTML =
+factor;
+
+document.getElementById("recommendation").innerHTML =
+recommendation;
+
+document.getElementById("forecast").innerHTML =
+"Estimated Trophy Potential: " + trophy +
+" lb bass under current conditions.";
+
+}
+
+</script>
+
+</body>
+</html>
