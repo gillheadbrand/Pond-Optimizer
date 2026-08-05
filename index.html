@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,173 +16,273 @@
 
 <div class="container">
 
-    <div class="card">
+<div class="card">
 
-        <h2>Pond Audit</h2>
+<h2>Pond Audit</h2>
 
-        <label>Aeration</label>
-        <select id="aeration">
-            <option value="0">No</option>
-            <option value="10">Yes</option>
-        </select>
+<label>Pond Size</label>
+<select id="acres">
+<option value="5">Under 1 Acre</option>
+<option value="10">1-5 Acres</option>
+<option value="15">5-20 Acres</option>
+<option value="20">20+ Acres</option>
+</select>
 
-        <label>Water Clarity</label>
-        <select id="clarity">
-            <option value="2">Muddy</option>
-            <option value="6">Very Clear</option>
-            <option value="10">18-30 Inch Bloom</option>
-        </select>
+<label>Water Source</label>
+<button class="info-btn" onclick="toggleInfo('watersource')" type="button">How do I identify this?</button>
 
-        <label>Bluegill Population</label>
-        <select id="bluegill">
-            <option value="2">Poor</option>
-            <option value="10">Average</option>
-            <option value="20">Excellent</option>
-        </select>
+<div id="watersource" class="info-box">
+<ul>
+<li>Spring Fed = Constant cool water entering pond</li>
+<li>Permanent Creek = Flows year round</li>
+<li>Seasonal Creek = Flows after rainfall</li>
+<li>Runoff Only = Rainfall dependent</li>
+</ul>
+</div>
 
-        <label>Feed Program</label>
-        <select id="feed">
-            <option value="0">None</option>
-            <option value="5">Occasional</option>
-            <option value="10">Daily</option>
-        </select>
+<select id="source">
+<option value="5">Runoff Only</option>
+<option value="10">Seasonal Creek</option>
+<option value="15">Permanent Creek</option>
+<option value="20">Spring Fed</option>
+</select>
 
-        <label>Threadfin Shad</label>
-        <select id="shad">
-            <option value="0">No</option>
-            <option value="10">Yes</option>
-        </select>
+<label>Number of Inlets</label>
+<select id="inlets">
+<option value="0">0</option>
+<option value="3">1</option>
+<option value="6">2-3</option>
+<option value="10">4+</option>
+</select>
 
-        <label>Brush Piles</label>
-        <select id="brush">
-            <option value="0">None</option>
-            <option value="5">Some</option>
-            <option value="10">Many</option>
-        </select>
+<label>Water Visibility</label>
+<select id="visibility">
+<option value="2">Under 12"</option>
+<option value="8">12-24"</option>
+<option value="15">18-36"</option>
+<option value="8">36-48"</option>
+<option value="3">48+" </option>
+</select>
 
-        <label>Gravel Beds</label>
-        <select id="gravel">
-            <option value="0">None</option>
-            <option value="5">Some</option>
-            <option value="10">Many</option>
-        </select>
+<label>Bluegill Population</label>
+<button class="info-btn" onclick="toggleInfo('bluegill')" type="button">How do I identify this?</button>
 
-        <label>Bass Condition</label>
-        <select id="bass">
-            <option value="0">Skinny</option>
-            <option value="10">Average</option>
-            <option value="20">Fat</option>
-        </select>
+<div id="bluegill" class="info-box">
+<ul>
+<li>Round body shape</li>
+<li>Dark ear flap</li>
+<li>Vertical bars on side</li>
+</ul>
+</div>
 
-        <label>Largest Bass Caught</label>
-        <select id="largest">
-            <option value="0">Under 3 lbs</option>
-            <option value="5">3-5 lbs</option>
-            <option value="10">5-8 lbs</option>
-            <option value="15">8-10 lbs</option>
-            <option value="20">10+ lbs</option>
-        </select>
+<select id="bluegillscore">
+<option value="5">Low</option>
+<option value="15">Average</option>
+<option value="25">High</option>
+</select>
 
-        <button onclick="calculate()">Run Gillhead Audit</button>
+<label>Crawfish Population</label>
+<button class="info-btn" onclick="toggleInfo('crawfish')" type="button">How do I identify this?</button>
 
-    </div>
+<div id="crawfish" class="info-box">
+<ul>
+<li>Small lobster-looking crustacean</li>
+<li>Found beneath rocks and logs</li>
+</ul>
+</div>
 
-    <div id="results" class="card" style="display:none;">
+<select id="crawfishscore">
+<option value="0">None</option>
+<option value="5">Some</option>
+<option value="10">Abundant</option>
+</select>
 
-        <h2>Results</h2>
+<label>Aquatic Insects</label>
+<select id="insects">
+<option value="0">Rare</option>
+<option value="5">Average</option>
+<option value="10">Abundant</option>
+</select>
 
-        <div id="score" class="score"></div>
+<label>Aquatic Vegetation Coverage</label>
+<select id="vegetation">
+<option value="2">0%</option>
+<option value="10">1-20%</option>
+<option value="15">20-40%</option>
+<option value="8">40-60%</option>
+<option value="3">60%+</option>
+</select>
 
-        <p id="grade"></p>
-        <p id="factor"></p>
-        <p id="recommendation"></p>
-        <p id="forecast"></p>
+<label>Algae</label>
+<select id="algae">
+<option value="5">Light</option>
+<option value="10">Moderate Bloom</option>
+<option value="3">Heavy Mats</option>
+</select>
 
-    </div>
+<label>Threadfin Shad</label>
+<select id="threadfin">
+<option value="0">Absent</option>
+<option value="5">Present</option>
+<option value="10">Abundant</option>
+</select>
+
+<label>Golden Shiners</label>
+<select id="shiners">
+<option value="0">Absent</option>
+<option value="5">Present</option>
+<option value="10">Abundant</option>
+</select>
+
+<label>Crappie Population</label>
+<select id="crappie">
+<option value="0">None</option>
+<option value="-5">Low</option>
+<option value="-15">Moderate</option>
+<option value="-25">High</option>
+</select>
+
+<label>Green Sunfish Population</label>
+<select id="greensunfish">
+<option value="0">None</option>
+<option value="-5">Low</option>
+<option value="-15">Moderate</option>
+<option value="-25">High</option>
+</select>
+
+<label>Bullhead Population</label>
+<select id="bullheads">
+<option value="0">None</option>
+<option value="-5">Low</option>
+<option value="-15">Moderate</option>
+<option value="-25">High</option>
+</select>
+
+<label>Small Bass (&lt;14")</label>
+<select id="smallbass">
+<option value="15">Low</option>
+<option value="10">Average</option>
+<option value="0">High</option>
+</select>
+
+<label>Medium Bass (14-18")</label>
+<select id="mediumbass">
+<option value="5">Low</option>
+<option value="15">Average</option>
+<option value="20">High</option>
+</select>
+
+<label>Large Bass (18+")</label>
+<select id="largebass">
+<option value="5">Low</option>
+<option value="15">Average</option>
+<option value="25">High</option>
+</select>
+
+<button onclick="calculate()">Run Gillhead Audit</button>
+
+</div>
+
+<div id="results" class="card" style="display:none;">
+
+<h2>Results</h2>
+
+<div id="score" class="score"></div>
+
+<p id="grade"></p>
+<p id="factor"></p>
+<p id="recommendation"></p>
+<p id="forecast"></p>
+
+</div>
 
 </div>
 
 <script>
 
-function calculate() {
+function toggleInfo(id){
+const box = document.getElementById(id);
 
-    let water =
-        Number(document.getElementById("aeration").value) +
-        Number(document.getElementById("clarity").value);
+if(box.style.display === "block"){
+box.style.display = "none";
+}
+else{
+box.style.display = "block";
+}
+}
 
-    let forage =
-        Number(document.getElementById("bluegill").value) +
-        Number(document.getElementById("feed").value) +
-        Number(document.getElementById("shad").value);
+function calculate(){
 
-    let habitat =
-        Number(document.getElementById("brush").value) +
-        Number(document.getElementById("gravel").value);
+let total = 0;
 
-    let bass =
-        Number(document.getElementById("bass").value) +
-        Number(document.getElementById("largest").value);
+[
+"acres",
+"source",
+"inlets",
+"visibility",
+"bluegillscore",
+"crawfishscore",
+"insects",
+"vegetation",
+"algae",
+"threadfin",
+"shiners",
+"crappie",
+"greensunfish",
+"bullheads",
+"smallbass",
+"mediumbass",
+"largebass"
+].forEach(id=>{
+total += Number(document.getElementById(id).value);
+});
 
-    let total = water + forage + habitat + bass;
+if(total < 0) total = 0;
+if(total > 100) total = 100;
 
-    if (total > 100) {
-        total = 100;
-    }
+let grade;
 
-    let grade = "";
+if(total >= 90){
+grade = "🏆 Elite Trophy Bass Water";
+}
+else if(total >= 80){
+grade = "✅ Excellent";
+}
+else if(total >= 65){
+grade = "👍 Good";
+}
+else if(total >= 50){
+grade = "⚠️ Average";
+}
+else{
+grade = "❌ Needs Improvement";
+}
 
-    if (total >= 90) {
-        grade = "🏆 Trophy Bass Factory";
-    } else if (total >= 80) {
-        grade = "✅ Excellent";
-    } else if (total >= 65) {
-        grade = "👍 Good";
-    } else if (total >= 50) {
-        grade = "⚠️ Fair";
-    } else {
-        grade = "❌ Needs Work";
-    }
+let factor="Bass Management";
+let recommendation="Maintain balance and monitor forage.";
 
-    let lowest = Math.min(water, forage, habitat, bass);
+if(Number(document.getElementById("crappie").value) <= -15){
+factor="Competition Pressure";
+recommendation="Crappie may be suppressing forage production.";
+}
+else if(Number(document.getElementById("bluegillscore").value) <= 5){
+factor="Forage Base";
+recommendation="Bluegill population appears too low.";
+}
+else if(Number(document.getElementById("vegetation").value) <= 2){
+factor="Habitat";
+recommendation="Insufficient vegetation and cover.";
+}
 
-    let factor = "";
-    let recommendation = "";
+let trophy = (4 + total * 0.08).toFixed(1);
 
-    if (lowest === forage) {
-        factor = "Forage Base";
-        recommendation = "Increase bluegill forage, feed daily, and consider threadfin shad.";
-    }
-    else if (lowest === habitat) {
-        factor = "Habitat";
-        recommendation = "Add brush piles, stake beds, spawning areas and shoreline cover.";
-    }
-    else if (lowest === water) {
-        factor = "Water Quality";
-        recommendation = "Consider aeration, lime, fertility management and water testing.";
-    }
-    else {
-        factor = "Bass Population";
-        recommendation = "Harvest small bass and increase forage availability.";
-    }
+document.getElementById("results").style.display="block";
 
-    let trophy = (4 + total / 12).toFixed(1);
-
-    document.getElementById("results").style.display = "block";
-
-    document.getElementById("score").innerHTML = total + "/100";
-
-    document.getElementById("grade").innerHTML =
-        "<strong>Grade:</strong> " + grade;
-
-    document.getElementById("factor").innerHTML =
-        "<strong>Limiting Factor:</strong> " + factor;
-
-    document.getElementById("recommendation").innerHTML =
-        "<strong>Top Recommendation:</strong> " + recommendation;
-
-    document.getElementById("forecast").innerHTML =
-        "<strong>Estimated Trophy Bass Potential:</strong> " +
-        trophy + " lb maximum bass";
+document.getElementById("score").innerHTML=total + "/100";
+document.getElementById("grade").innerHTML="<strong>Grade:</strong> " + grade;
+document.getElementById("factor").innerHTML="<strong>Bottleneck:</strong> " + factor;
+document.getElementById("recommendation").innerHTML="<strong>Recommendation:</strong> " + recommendation;
+document.getElementById("forecast").innerHTML="<strong>Trophy Potential:</strong> " + trophy + " lb maximum bass";
 
 }
 
