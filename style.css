@@ -1,0 +1,122 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f6f7;
+    color:#222;
+}
+
+header{
+    background:#0f5d47;
+    color:white;
+    text-align:center;
+    padding:40px 20px;
+}
+
+.logo{
+    width:200px;
+    max-width:80%;
+    margin-bottom:15px;
+}
+
+header h1{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.hero{
+    height:350px;
+    background-image:url("images/bass-banner.jpg");
+    background-size:cover;
+    background-position:center;
+    position:relative;
+}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+.hero-overlay h2{
+    font-size:48px;
+    margin-bottom:10px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:30px 20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    margin-bottom:25px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+h2{
+    color:#0f5d47;
+    margin-bottom:15px;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    margin-bottom:5px;
+    font-weight:bold;
+}
+
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+button{
+    width:100%;
+    margin-top:25px;
+    background:#0f5d47;
+    color:white;
+    border:none;
+    padding:15px;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0a4333;
+}
+
+.results{
+    display:none;
+}
+
+.score{
+    font-size:72px;
+    font-weight:bold;
+    color:#0f5d47;
+    margin-bottom:20px;
+}
+
+#grade,
+#factor,
+#recommendation,
+#forecast{
+    margin-top:15px;
+    font-size:18px;
+    line-height:1.5;
+}
