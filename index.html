@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gillhead Pond Optimizer™</title>
-style.css
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -16,188 +17,108 @@ style.css
 
 <div class="container">
 
-<div class="card">
+    <div class="card">
 
-<h2>Pond Audit</h2>
+        <h2>Pond Audit</h2>
 
-<label>Aeration</label>
-<select id="aeration">
-<option value="0">No</option>
-<option value="10">Yes</option>
-</select>
+        <label>Aeration</label>
+        <select id="aeration">
+            <option value="0">No</option>
+            <option value="10">Yes</option>
+        </select>
 
-<label>Water Clarity</label>
-<select id="clarity">
-<option value="2">Muddy</option>
-<option value="6">Very Clear</option>
-<option value="10">18-30 Inch Bloom</option>
-</select>
+        <label>Water Clarity</label>
+        <select id="clarity">
+            <option value="2">Muddy</option>
+            <option value="6">Very Clear</option>
+            <option value="10">18-30 Inch Bloom</option>
+        </select>
 
-<label>Bluegill Population</label>
-<select id="bluegill">
-<option value="2">Poor</option>
-<option value="10">Average</option>
-<option value="20">Excellent</option>
-</select>
+        <label>Bluegill Population</label>
+        <select id="bluegill">
+            <option value="2">Poor</option>
+            <option value="10">Average</option>
+            <option value="20">Excellent</option>
+        </select>
 
-<label>Feed Program</label>
-<select id="feed">
-<option value="0">None</option>
-<option value="5">Occasional</option>
-<option value="10">Daily</option>
-</select>
+        <label>Feed Program</label>
+        <select id="feed">
+            <option value="0">None</option>
+            <option value="5">Occasional</option>
+            <option value="10">Daily</option>
+        </select>
 
-<label>Threadfin Shad</label>
-<select id="shad">
-<option value="0">No</option>
-<option value="10">Yes</option>
-</select>
+        <label>Threadfin Shad</label>
+        <select id="shad">
+            <option value="0">No</option>
+            <option value="10">Yes</option>
+        </select>
 
-<label>Brush Piles</label>
-<select id="brush">
-<option value="0">None</option>
-<option value="5">Some</option>
-<option value="10">Many</option>
-</select>
+        <label>Brush Piles</label>
+        <select id="brush">
+            <option value="0">None</option>
+            <option value="5">Some</option>
+            <option value="10">Many</option>
+        </select>
 
-<label>Gravel Beds</label>
-<select id="gravel">
-<option value="0">None</option>
-<option value="5">Some</option>
-<option value="10">Many</option>
-</select>
+        <label>Gravel Beds</label>
+        <select id="gravel">
+            <option value="0">None</option>
+            <option value="5">Some</option>
+            <option value="10">Many</option>
+        </select>
 
-<label>Bass Condition</label>
-<select id="bass">
-<option value="0">Skinny</option>
-<option value="10">Average</option>
-<option value="20">Fat</option>
-</select>
+        <label>Bass Condition</label>
+        <select id="bass">
+            <option value="0">Skinny</option>
+            <option value="10">Average</option>
+            <option value="20">Fat</option>
+        </select>
 
-<label>Largest Bass Caught</label>
-<select id="largest">
-<option value="0">Under 3 lbs</option>
-<option value="5">3-5 lbs</option>
-<option value="10">5-8 lbs</option>
-<option value="15">8-10 lbs</option>
-<option value="20">10+ lbs</option>
-</select>
+        <label>Largest Bass Caught</label>
+        <select id="largest">
+            <option value="0">Under 3 lbs</option>
+            <option value="5">3-5 lbs</option>
+            <option value="10">5-8 lbs</option>
+            <option value="15">8-10 lbs</option>
+            <option value="20">10+ lbs</option>
+        </select>
 
-<button onclick="calculate()">Run Gillhead Audit</button>
+        <button onclick="calculate()">Run Gillhead Audit</button>
 
-</div>
+    </div>
 
-<div id="results" class="card" style="display:none">
+    <div id="results" class="card" style="display:none;">
 
-<h2>Results</h2>
+        <h2>Results</h2>
 
-<div id="score" class="score"></div>
+        <div id="score" class="score"></div>
 
-<p id="grade"></p>
-<p id="factor"></p>
-<p id="recommendation"></p>
-<p id="forecast"></p>
+        <p id="grade"></p>
+        <p id="factor"></p>
+        <p id="recommendation"></p>
+        <p id="forecast"></p>
 
-</div>
+    </div>
 
 </div>
 
 <script>
 
-function calculate(){
+function calculate() {
 
-let water =
-Number(document.getElementById("aeration").value)
-+
-Number(document.getElementById("clarity").value);
+    let water =
+        Number(document.getElementById("aeration").value) +
+        Number(document.getElementById("clarity").value);
 
-let forage =
-Number(document.getElementById("bluegill").value)
-+
-Number(document.getElementById("feed").value)
-+
-Number(document.getElementById("shad").value);
+    let forage =
+        Number(document.getElementById("bluegill").value) +
+        Number(document.getElementById("feed").value) +
+        Number(document.getElementById("shad").value);
 
-let habitat =
-Number(document.getElementById("brush").value)
-+
-Number(document.getElementById("gravel").value);
+    let habitat =
+        Number(document.getElementById("brush").value) +
+        Number(document.getElementById("gravel").value);
 
-let bass =
-Number(document.getElementById("bass").value)
-+
-Number(document.getElementById("largest").value);
-
-let total =
-water + forage + habitat + bass;
-
-if(total > 100){
-total = 100;
-}
-
-let grade = "";
-
-if(total >= 90){
-grade = "Trophy Bass Factory";
-}
-else if(total >= 80){
-grade = "Excellent";
-}
-else if(total >= 65){
-grade = "Good";
-}
-else if(total >= 50){
-grade = "Fair";
-}
-else{
-grade = "Needs Work";
-}
-
-let lowest = Math.min(water, forage, habitat, bass);
-
-let factor = "";
-let recommendation = "";
-
-if(lowest === forage){
-factor = "Forage Base";
-recommendation = "Increase bluegill forage and maintain feeding.";
-}
-else if(lowest === habitat){
-factor = "Habitat";
-recommendation = "Add brush piles, cover and spawning areas.";
-}
-else if(lowest === water){
-factor = "Water Quality";
-recommendation = "Evaluate aeration, fertility and lime needs.";
-}
-else{
-factor = "Bass Population";
-recommendation = "Harvest small bass and improve forage.";
-}
-
-let trophy =
-(4 + total/12).toFixed(1);
-
-document.getElementById("results").style.display = "block";
-
-document.getElementById("score").innerHTML =
-total + "/100";
-
-document.getElementById("grade").innerHTML =
-"<strong>Grade:</strong> " + grade;
-
-document.getElementById("factor").innerHTML =
-"<strong>Limiting Factor:</strong> " + factor;
-
-document.getElementById("recommendation").innerHTML =
-"<strong>Recommendation:</strong> " + recommendation;
-
-document.getElementById("forecast").innerHTML =
-"<strong>Trophy Potential:</strong> " + trophy + " lb bass";
-
-}
-
-</script>
-
-</body>
-</html>
+    let bass =
+        Number(document.getElementById("bass").
