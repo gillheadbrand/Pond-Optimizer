@@ -1,7 +1,131 @@
-body{
-    background:red;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-h1{
-    color:white;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #eef3ef;
+    color: #222;
+    line-height: 1.5;
+}
+
+header {
+    background: linear-gradient(135deg, #0f5d47, #15715a);
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+header h1 {
+    font-size: 2.6rem;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+h2 {
+    color: #0f5d47;
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cfd8d3;
+    border-radius: 8px;
+    background: white;
+    font-size: 15px;
+    transition: border-color 0.2s;
+}
+
+select:focus {
+    outline: none;
+    border-color: #0f5d47;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 25px;
+    background: #0f5d47;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #0a4333;
+}
+
+button:active {
+    transform: scale(0.99);
+}
+
+.score {
+    font-size: 4.5rem;
+    font-weight: 800;
+    color: #0f5d47;
+    margin-bottom: 20px;
+}
+
+#grade,
+#factor,
+#recommendation,
+#forecast {
+    margin-top: 12px;
+    font-size: 1.1rem;
+}
+
+strong {
+    color: #0f5d47;
+}
+
+#results {
+    border-top: 5px solid #0f5d47;
+}
+
+@media (max-width: 768px) {
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .score {
+        font-size: 3rem;
+    }
+
+    .card {
+        padding: 18px;
+    }
 }
