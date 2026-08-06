@@ -22,9 +22,9 @@ class="logo">
 
 <div class="card">
 
-<h2>Pond Audit</h2>
+<h2>Lake Analyzer</h2>
 
-<label>Pond Size</label>
+<label>Size</label>
 <select id="acres">
 <option value="5">Under 1 Acre</option>
 <option value="10">1-5 Acres</option>
@@ -32,7 +32,7 @@ class="logo">
 <option value="20">20+ Acres</option>
 </select>
 
-<label>Water Source</label>
+<label>Water Source(s)</label>
 <button class="info-btn" onclick="toggleInfo('watersource')" type="button">How do I identify this?</button>
 
 <div id="watersource" class="info-box">
@@ -346,12 +346,104 @@ class="species-image">
 <h2>Results</h2>
 
 <div id="score" class="score"></div>
-<p id="waterscore"></p>
-<p id="foragescore"></p>
-<p id="habitatscore"></p>
-<p id="structurescore"></p>
-<p id="competitionscore"></p>
-<p id="bassscore"></p>
+<div class="category-row">
+    <span id="waterscore"></span>
+    <button class="optimize-btn"
+            onclick="toggleInfo('watertips')">
+        Help Me Optimize
+    </button>
+</div>
+
+<div id="watertips" class="info-box">
+    <ul>
+        <li>Add watershed protection</li>
+        <li>Improve inflow quality</li>
+        <li>Aim for 18-36" visibility</li>
+        <li>Reduce erosion entering lake</li>
+    </ul>
+</div>
+
+<div class="category-row">
+    <span id="foragescore"></span>
+    <button class="optimize-btn"
+            onclick="toggleInfo('foragetips')">
+        Help Me Optimize
+    </button>
+</div>
+
+<div id="foragetips" class="info-box">
+    <ul>
+        <li>Increase bluegill population</li>
+        <li>Add crawfish habitat</li>
+        <li>Consider threadfin shad</li>
+        <li>Create spawning habitat</li>
+    </ul>
+</div>
+
+<div class="category-row">
+    <span id="habitatscore"></span>
+    <button class="optimize-btn"
+            onclick="toggleInfo('habitattips')">
+        Help Me Optimize
+    </button>
+</div>
+
+<div id="habitattips" class="info-box">
+    <ul>
+        <li>Maintain 20-40% vegetation</li>
+        <li>Protect shoreline habitat</li>
+        <li>Avoid removing all cover</li>
+    </ul>
+</div>
+
+<div class="category-row">
+    <span id="structurescore"></span>
+    <button class="optimize-btn"
+            onclick="toggleInfo('structuretips')">
+        Help Me Optimize
+    </button>
+</div>
+
+<div id="structuretips" class="info-box">
+    <ul>
+        <li>Add brush piles</li>
+        <li>Add rock piles</li>
+        <li>Add laydowns</li>
+        <li>Add artificial habitat</li>
+    </ul>
+</div>
+
+<div class="category-row">
+    <span id="competitionscore"></span>
+    <button class="optimize-btn"
+            onclick="toggleInfo('competitiontips')">
+        Help Me Optimize
+    </button>
+</div>
+
+<div id="competitiontips" class="info-box">
+    <ul>
+        <li>Remove unwanted crappie</li>
+        <li>Reduce green sunfish numbers</li>
+        <li>Control bullhead populations</li>
+    </ul>
+</div>
+
+<div class="category-row">
+    <span id="bassscore"></span>
+    <button class="optimize-btn"
+            onclick="toggleInfo('basstips')">
+        Help Me Optimize
+    </button>
+</div>
+
+<div id="basstips" class="info-box">
+    <ul>
+        <li>Harvest overcrowded bass</li>
+        <li>Improve forage availability</li>
+        <li>Protect larger fish</li>
+    </ul>
+</div>
 
 <hr>
 
