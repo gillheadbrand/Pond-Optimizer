@@ -11,10 +11,11 @@ color:#222;
 }
 
 header{
-background:linear-gradient(135deg,#0f5d47,#1b8065);
-color:white;
+background:#f8f7f2;
+color:#0f5d47;
 text-align:center;
-padding:50px 20px;
+padding:20px;
+border-bottom:3px solid #0f5d47;
 }
 
 header h1{
