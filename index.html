@@ -224,11 +224,22 @@
 </select>
 
 <label>Bullhead Population</label>
+<button class="info-btn" onclick="toggleInfo('bullheadinfo')" type="button">How do I identify this?</button>
+
+<div id="bullheadinfo" class="info-box">
+<ul>
+<li>Whiskers like a catfish</li>
+<li>Flat broad head</li>
+<li>No scales</li>
+<li>Bottom feeder</li>
+<li>Can become overcrowded in ponds</li>
+</ul>
+</div>
 <select id="bullheads">
 <option value="0">None</option>
-<option value="-5">Low</option>
-<option value="-15">Moderate</option>
-<option value="-25">High</option>
+<option value="-10">Low</option>
+<option value="-30">Moderate</option>
+<option value="-50">High</option>
 </select>
 
 <label>Small Bass (&lt;14")</label>
@@ -282,7 +293,8 @@ box.style.display = "none";
 else{
 box.style.display = "block";
 }
-
+}
+    
 function calculate(){
 
 let water =
