@@ -60,8 +60,8 @@
 <option value="2">Under 12"</option>
 <option value="8">12-24"</option>
 <option value="15">18-36"</option>
-<option value="8">36-48"</option>
-<option value="3">48+" </option>
+<option value="5">36-48"</option>
+<option value="0">48+" </option>
 </select>
 
 <label>Bluegill Population</label>
@@ -78,7 +78,7 @@
 <select id="bluegillscore">
 <option value="5">Low</option>
 <option value="15">Average</option>
-<option value="25">High</option>
+<option value="35">High</option>
 </select>
 
 <label>Crawfish Population</label>
@@ -136,6 +136,30 @@
 <option value="15">20-40%</option>
 <option value="8">40-60%</option>
 <option value="3">60%+</option>
+</select>
+
+<label>Structure Availability</label>
+
+<button class="info-btn" onclick="toggleInfo('structureinfo')" type="button">
+How do I identify this?
+</button>
+
+<div id="structureinfo" class="info-box">
+<ul>
+<li>Brush piles</li>
+<li>Laydown trees</li>
+<li>Standing timber</li>
+<li>Rock piles</li>
+<li>Docks</li>
+<li>Artificial fish habitat</li>
+<li>Provides ambush cover for bass</li>
+</ul>
+</div>
+
+<select id="structure">
+<option value="0">Very Little</option>
+<option value="10">Moderate</option>
+<option value="20">Abundant</option>
 </select>
 
 <label>Algae</label>
@@ -263,6 +287,17 @@
 <option value="25">High</option>
 </select>
 
+<label>Largest Bass Ever Caught</label>
+
+<select id="largestbass">
+<option value="0">Unknown</option>
+<option value="2">Under 3 lbs</option>
+<option value="5">3-5 lbs</option>
+<option value="10">5-8 lbs</option>
+<option value="15">8-10 lbs</option>
+<option value="20">10+ lbs</option>
+</select>
+
 <button onclick="calculate()">Run Gillhead Audit</button>
 
 </div>
@@ -272,6 +307,14 @@
 <h2>Results</h2>
 
 <div id="score" class="score"></div>
+<p id="waterscore"></p>
+<p id="foragescore"></p>
+<p id="habitatscore"></p>
+<p id="structurescore"></p>
+<p id="competitionscore"></p>
+<p id="bassscore"></p>
+
+<hr>
 
 <p id="grade"></p>
 <p id="factor"></p>
@@ -301,6 +344,8 @@ let water =
 Number(source.value) +
 Number(inlets.value) +
 Number(visibility.value);
+    
+water += Number(acres.value);
 
 let forage =
 Number(bluegillscore.value) +
@@ -314,7 +359,7 @@ Number(vegetation.value) +
 Number(algae.value);
 
 let structure =
-Number(vegetation.value);
+Number(document.getElementById("structure").value);
 
 let competition = 100;
 
@@ -328,6 +373,8 @@ let bass =
 Number(smallbass.value) +
 Number(mediumbass.value) +
 Number(largebass.value);
+
+bass += Number(largestbass.value);
 
 /* HARSHER PENALTIES */
 
@@ -499,6 +546,24 @@ document.getElementById("results").style.display = "block";
 document.getElementById("score").innerHTML =
 total + "/100";
 
+document.getElementById("waterscore").innerHTML =
+"<strong>Water:</strong> " + water;
+
+document.getElementById("foragescore").innerHTML =
+"<strong>Forage:</strong> " + forage;
+
+document.getElementById("habitatscore").innerHTML =
+"<strong>Habitat:</strong> " + habitat;
+
+document.getElementById("structurescore").innerHTML =
+"<strong>Structure:</strong> " + structure;
+
+document.getElementById("competitionscore").innerHTML =
+"<strong>Competition:</strong> " + competition;
+
+document.getElementById("bassscore").innerHTML =
+"<strong>Bass Population:</strong> " + bass;
+    
 document.getElementById("grade").innerHTML =
 "<strong>Grade:</strong> " + grade;
 
@@ -515,6 +580,8 @@ trophy +
 " lb maximum bass";
 
 }
+
+</script>
 
 </body>
 </html>
