@@ -128,3 +128,10 @@ color:#0f5d47;
     border-radius:10px;
     border:2px solid #d9d9d9;
 }
+
+.logo{
+    display:block;
+    width:300px;
+    max-width:90%;
+    margin:0 auto 20px auto;
+}
