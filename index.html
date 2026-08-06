@@ -98,6 +98,18 @@
 </select>
 
 <label>Aquatic Insects</label>
+<button class="info-btn" onclick="toggleInfo('insectsinfo')" type="button">How do I identify this?</button>
+
+<div id="insectsinfo" class="info-box">
+<ul>
+<li>Dragonflies</li>
+<li>Damselflies</li>
+<li>Mayflies</li>
+<li>Aquatic beetles</li>
+<li>Indicator of pond productivity</li>
+</ul>
+</div>
+
 <select id="insects">
 <option value="0">Rare</option>
 <option value="5">Average</option>
@@ -105,6 +117,19 @@
 </select>
 
 <label>Aquatic Vegetation Coverage</label>
+<button class="info-btn" onclick="toggleInfo('vegetationinfo')" type="button">How do I identify this?</button>
+
+<div id="vegetationinfo" class="info-box">
+<ul>
+<li>Water Willow</li>
+<li>Pondweed</li>
+<li>Coontail</li>
+<li>Lily Pads</li>
+<li>Provides cover for forage fish</li>
+<li>20-40% coverage is generally ideal</li>
+</ul>
+</div>
+
 <select id="vegetation">
 <option value="2">0%</option>
 <option value="10">1-20%</option>
@@ -121,6 +146,18 @@
 </select>
 
 <label>Threadfin Shad</label>
+<button class="info-btn" onclick="toggleInfo('threadfininfo')" type="button">How do I identify this?</button>
+
+<div id="threadfininfo" class="info-box">
+<ul>
+<li>Silver baitfish</li>
+<li>Long thread extending from dorsal fin</li>
+<li>Found schooling in open water</li>
+<li>Often flicker near surface</li>
+<li>Excellent trophy bass forage</li>
+</ul>
+</div>
+
 <select id="threadfin">
 <option value="0">Absent</option>
 <option value="5">Present</option>
@@ -128,6 +165,18 @@
 </select>
 
 <label>Golden Shiners</label>
+<button class="info-btn" onclick="toggleInfo('shinersinfo')" type="button">How do I identify this?</button>
+
+<div id="shinersinfo" class="info-box">
+<ul>
+<li>Golden or bronze coloration</li>
+<li>Slender minnow-like body</li>
+<li>Often around vegetation</li>
+<li>Larger than most baitfish</li>
+<li>Excellent supplemental forage</li>
+</ul>
+</div>
+
 <select id="shiners">
 <option value="0">Absent</option>
 <option value="5">Present</option>
@@ -135,19 +184,43 @@
 </select>
 
 <label>Crappie Population</label>
+<button class="info-btn" onclick="toggleInfo('crappieinfo')" type="button">How do I identify this?</button>
+
+<div id="crappieinfo" class="info-box">
+<ul>
+<li>Deep-bodied shape</li>
+<li>Black speckled pattern</li>
+<li>Large mouth</li>
+<li>Often school together</li>
+<li>Can heavily compete with bass forage</li>
+</ul>
+</div>
+
 <select id="crappie">
 <option value="0">None</option>
-<option value="-5">Low</option>
-<option value="-15">Moderate</option>
-<option value="-25">High</option>
+<option value="-10">Low</option>
+<option value="-30">Moderate</option>
+<option value="-50">High</option>
 </select>
 
 <label>Green Sunfish Population</label>
+<button class="info-btn" onclick="toggleInfo('greensunfishinfo')" type="button">How do I identify this?</button>
+
+<div id="greensunfishinfo" class="info-box">
+<ul>
+<li>Large mouth for a sunfish</li>
+<li>Blue-green markings on cheeks</li>
+<li>Yellow/orange fin edges</li>
+<li>Aggressive predator</li>
+<li>Competes with bluegill and bass fry</li>
+</ul>
+</div>
+
 <select id="greensunfish">
 <option value="0">None</option>
-<option value="-5">Low</option>
-<option value="-15">Moderate</option>
-<option value="-25">High</option>
+<option value="-10">Low</option>
+<option value="-30">Moderate</option>
+<option value="-50">High</option>
 </select>
 
 <label>Bullhead Population</label>
@@ -209,84 +282,227 @@ box.style.display = "none";
 else{
 box.style.display = "block";
 }
-}
 
 function calculate(){
 
-let total = 0;
+let water =
+Number(source.value) +
+Number(inlets.value) +
+Number(visibility.value);
 
-[
-"acres",
-"source",
-"inlets",
-"visibility",
-"bluegillscore",
-"crawfishscore",
-"insects",
-"vegetation",
-"algae",
-"threadfin",
-"shiners",
-"crappie",
-"greensunfish",
-"bullheads",
-"smallbass",
-"mediumbass",
-"largebass"
-].forEach(id=>{
-total += Number(document.getElementById(id).value);
-});
+let forage =
+Number(bluegillscore.value) +
+Number(crawfishscore.value) +
+Number(threadfin.value) +
+Number(shiners.value) +
+Number(insects.value);
 
-if(total < 0) total = 0;
-if(total > 100) total = 100;
+let habitat =
+Number(vegetation.value) +
+Number(algae.value);
 
-let grade;
+let structure =
+Number(vegetation.value);
 
-if(total >= 90){
-grade = "🏆 Elite Trophy Bass Water";
+let competition = 100;
+
+competition += Number(crappie.value);
+competition += Number(greensunfish.value);
+competition += Number(bullheads.value);
+
+competition = Math.max(0, competition);
+
+let bass =
+Number(smallbass.value) +
+Number(mediumbass.value) +
+Number(largebass.value);
+
+/* HARSHER PENALTIES */
+
+if(Number(bluegillscore.value) <= 5){
+forage -= 15;
 }
-else if(total >= 80){
+
+if(Number(crawfishscore.value) === 0){
+forage -= 10;
+}
+
+if(Number(threadfin.value) === 0){
+forage -= 5;
+}
+
+if(Number(shiners.value) === 0){
+forage -= 5;
+}
+
+if(Number(vegetation.value) <= 2){
+habitat -= 10;
+}
+
+water = Math.max(0, water);
+forage = Math.max(0, forage);
+habitat = Math.max(0, habitat);
+
+/* OVERALL */
+
+let total = Math.round(
+
+(
+water +
+forage +
+habitat +
+structure +
+competition +
+bass
+) / 6
+
+);
+
+if(total > 100){
+total = 100;
+}
+
+if(total < 0){
+total = 0;
+}
+
+/* HARDER GRADING */
+
+let grade = "";
+
+if(total >= 95){
+grade = "🏆 Elite Trophy Water";
+}
+else if(total >= 85){
 grade = "✅ Excellent";
 }
-else if(total >= 65){
+else if(total >= 70){
 grade = "👍 Good";
 }
-else if(total >= 50){
-grade = "⚠️ Average";
+else if(total >= 55){
+grade = "⚠️ Fair";
+}
+else if(total >= 40){
+grade = "❌ Poor";
 }
 else{
-grade = "❌ Needs Improvement";
+grade = "🚨 Serious Limiting Factors";
 }
 
-let factor="Bass Management";
-let recommendation="Maintain balance and monitor forage.";
+/* FIND BOTTLENECK */
 
-if(Number(document.getElementById("crappie").value) <= -15){
-factor="Competition Pressure";
-recommendation="Crappie may be suppressing forage production.";
-}
-else if(Number(document.getElementById("bluegillscore").value) <= 5){
-factor="Forage Base";
-recommendation="Bluegill population appears too low.";
-}
-else if(Number(document.getElementById("vegetation").value) <= 2){
-factor="Habitat";
-recommendation="Insufficient vegetation and cover.";
-}
+const categories = {
+Water: water,
+Forage: forage,
+Habitat: habitat,
+Structure: structure,
+Competition: competition,
+Bass: bass
+};
 
-let trophy = (4 + total * 0.08).toFixed(1);
+let factor = Object.keys(categories)
+.reduce((a,b)=>
+categories[a] < categories[b] ? a : b
+);
 
-document.getElementById("results").style.display="block";
+/* RECOMMENDATIONS */
 
-document.getElementById("score").innerHTML=total + "/100";
-document.getElementById("grade").innerHTML="<strong>Grade:</strong> " + grade;
-document.getElementById("factor").innerHTML="<strong>Bottleneck:</strong> " + factor;
-document.getElementById("recommendation").innerHTML="<strong>Recommendation:</strong> " + recommendation;
-document.getElementById("forecast").innerHTML="<strong>Trophy Potential:</strong> " + trophy + " lb maximum bass";
+let recommendations = [];
 
+if(Number(crappie.value) <= -15){
+recommendations.push(
+"High crappie pressure detected. Crappie can dramatically reduce bluegill recruitment and stunt bass growth."
+);
 }
 
-</script>
+if(Number(greensunfish.value) <= -15){
+recommendations.push(
+"Green sunfish competition detected. These fish often outcompete young bluegill and bass fry."
+);
+}
+
+if(Number(bullheads.value) <= -15){
+recommendations.push(
+"Bullhead populations may be consuming forage resources and reducing pond efficiency."
+);
+}
+
+if(Number(bluegillscore.value) <= 5){
+recommendations.push(
+"Forage deficiency detected. Bluegill abundance appears too low for consistent trophy bass growth."
+);
+}
+
+if(Number(crawfishscore.value) === 0){
+recommendations.push(
+"No crawfish detected. Crawfish are among the best forage sources for larger bass."
+);
+}
+
+if(Number(threadfin.value) === 0){
+recommendations.push(
+"No threadfin shad observed. Open-water forage opportunities may be limited."
+);
+}
+
+if(Number(shiners.value) === 0){
+recommendations.push(
+"No golden shiners detected. Supplemental forage diversity may be lacking."
+);
+}
+
+if(Number(vegetation.value) <= 2){
+recommendations.push(
+"Very little aquatic vegetation is present. Nursery habitat and forage protection appear limited."
+);
+}
+
+if(Number(inlets.value) === 0){
+recommendations.push(
+"No active inflows detected. Pond productivity may rely entirely on rainfall."
+);
+}
+
+if(Number(source.value) === 5){
+recommendations.push(
+"Runoff-only water source detected. Water quality and pond productivity may fluctuate significantly."
+);
+}
+
+if(recommendations.length === 0){
+recommendations.push(
+"System appears balanced. Continue biomass monitoring, forage management and bass harvest strategy."
+);
+}
+
+/* TROPHY POTENTIAL */
+
+let trophy =
+(4 + total * 0.08).toFixed(1);
+
+/* RESULTS */
+
+document.getElementById("results").style.display = "block";
+
+document.getElementById("score").innerHTML =
+total + "/100";
+
+document.getElementById("grade").innerHTML =
+"<strong>Grade:</strong> " + grade;
+
+document.getElementById("factor").innerHTML =
+"<strong>Main Bottleneck:</strong> " + factor;
+
+document.getElementById("recommendation").innerHTML =
+"<strong>Recommendations:</strong><br><br>" +
+recommendations.join("<br><br>");
+
+document.getElementById("forecast").innerHTML =
+"<strong>Estimated Trophy Bass Potential:</strong> " +
+trophy +
+" lb maximum bass";
+
+}
 
 </body>
 </html>
