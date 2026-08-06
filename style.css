@@ -131,7 +131,9 @@ color:#0f5d47;
 
 .logo{
     display:block;
-    width:300px;
-    max-width:90%;
-    margin:0 auto 20px auto;
+    max-width:250px;
+    max-height:100px;
+    width:auto;
+    height:auto;
+    margin:0 auto 10px auto;
 }
