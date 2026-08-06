@@ -224,7 +224,7 @@ How do I identify this?
 <option value="0">None</option>
 <option value="-10">Low</option>
 <option value="-30">Moderate</option>
-<option value="-50">High</option>
+<option value="-40">High</option>
 </select>
 
 <label>Green Sunfish Population</label>
@@ -244,7 +244,7 @@ How do I identify this?
 <option value="0">None</option>
 <option value="-10">Low</option>
 <option value="-30">Moderate</option>
-<option value="-50">High</option>
+<option value="-40">High</option>
 </select>
 
 <label>Bullhead Population</label>
@@ -263,7 +263,7 @@ How do I identify this?
 <option value="0">None</option>
 <option value="-10">Low</option>
 <option value="-30">Moderate</option>
-<option value="-50">High</option>
+<option value="-40">High</option>
 </select>
 
 <label>Small Bass (&lt;14")</label>
@@ -374,7 +374,7 @@ Number(smallbass.value) +
 Number(mediumbass.value) +
 Number(largebass.value);
 
-bass += Number(largestbass.value);
+bass += Number(largestbass.value) * 2;
 
 /* HARSHER PENALTIES */
 
@@ -405,17 +405,18 @@ habitat = Math.max(0, habitat);
 /* OVERALL */
 
 let total = Math.round(
-
 (
 water +
 forage +
 habitat +
 structure +
-competition +
 bass
-) / 6
-
+) / 5
 );
+
+total -= (100 - competition) * 0.25;
+
+total += Number(largestbass.value);
 
 if(total > 100){
 total = 100;
@@ -537,7 +538,7 @@ recommendations.push(
 /* TROPHY POTENTIAL */
 
 let trophy =
-(4 + total * 0.08).toFixed(1);
+(5 + total * 0.10).toFixed(1);
 
 /* RESULTS */
 
