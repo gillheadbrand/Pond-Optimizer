@@ -157,3 +157,16 @@ color:#0f5d47;
     font-size:14px;
     font-weight:bold;
 }
+.header-hero{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+}
+
+.hero-image{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:12px;
+}
