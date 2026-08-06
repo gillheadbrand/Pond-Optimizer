@@ -69,7 +69,8 @@
 
 <div id="bluegill" class="info-box">
 
-images/threadfin.jpgThreadfin Shad"
+<img src="images/bluegill.jpg"
+alt="Bluegill
 class="species-image">
     
 <ul>
@@ -90,7 +91,8 @@ class="species-image">
 
 <div id="crawfish" class="info-box">
 
-images/threadfin.jpgThreadfin Shad"
+<img src="images/bluegill.jpg"
+alt="Bluegill
 class="species-image">
     
 <ul>
@@ -182,7 +184,8 @@ How do I identify this?
 
 <div id="threadfininfo" class="info-box">
 
-images/threadfin.jpgThreadfin Shad"
+<img src="images/bluegill.jpg"
+alt="Bluegill
 class="species-image">
     
 <ul>
@@ -205,7 +208,8 @@ class="species-image">
 
 <div id="shinersinfo" class="info-box">
 
-images/threadfin.jpgThreadfin Shad"
+<img src="images/bluegill.jpg"
+alt="Bluegill
 class="species-image">
     
 <ul>
@@ -228,7 +232,8 @@ class="species-image">
 
 <div id="crappieinfo" class="info-box">
 
-images/threadfin.jpgThreadfin Shad"
+<img src="images/bluegill.jpg"
+alt="Bluegill
 class="species-image">
     
 <ul>
@@ -252,7 +257,8 @@ class="species-image">
 
 <div id="greensunfishinfo" class="info-box">
 
-images/threadfin.jpgThreadfin Shad"
+<img src="images/bluegill.jpg"
+alt="Bluegill
 class="species-image">
     
 <ul>
@@ -276,7 +282,8 @@ class="species-image">
 
 <div id="bullheadinfo" class="info-box">
 
-images/threadfin.jpgThreadfin Shad"
+<img src="images/bluegill.jpg"
+alt="Bluegill
 class="species-image">
     
 <ul>
@@ -367,88 +374,96 @@ box.style.display = "block";
 }
     
 function calculate(){
-
-let water =
+ 
+/* WATER */
+ 
+let water = (
+(
 Number(source.value) +
 Number(inlets.value) +
-Number(visibility.value);
-    
-water += Number(acres.value);
-
-let forage =
+Number(visibility.value) +
+Number(acres.value)
+) / 65
+) * 100;
+ 
+/* FORAGE */
+ 
+let forage = (
+(
 Number(bluegillscore.value) +
 Number(crawfishscore.value) +
 Number(threadfin.value) +
 Number(shiners.value) +
-Number(insects.value);
-
-let habitat =
+Number(insects.value)
+) / 75
+) * 100;
+ 
+/* HABITAT */
+ 
+let habitat = (
+(
 Number(vegetation.value) +
-Number(algae.value);
-
-let structure =
-Number(document.getElementById("structure").value);
-
+Number(algae.value)
+) / 25
+) * 100;
+ 
+/* STRUCTURE */
+ 
+let structure = (
+Number(document.getElementById("structure").value) / 20
+) * 100;
+ 
+/* COMPETITION */
+ 
 let competition = 100;
-
+ 
 competition += Number(crappie.value);
 competition += Number(greensunfish.value);
 competition += Number(bullheads.value);
-
+ 
 competition = Math.max(0, competition);
-
-let bass =
+ 
+/* BASS POPULATION */
+ 
+let bass = (
+(
 Number(smallbass.value) +
 Number(mediumbass.value) +
-Number(largebass.value);
-
-bass += Number(largestbass.value) * 2;
-
-/* HARSHER PENALTIES */
-
+Number(largebass.value) +
+(Number(largestbass.value) * 2)
+) / 100
+) * 100;
+ 
+/* FORAGE PENALTIES */
+ 
 if(Number(bluegillscore.value) <= 5){
-forage -= 15;
-}
-
-if(Number(crawfishscore.value) === 0){
 forage -= 10;
 }
-
-if(Number(threadfin.value) === 0){
+ 
+if(Number(crawfishscore.value) === 0){
 forage -= 5;
 }
-
-if(Number(shiners.value) === 0){
-forage -= 5;
-}
-
-water = Math.max(0, water);
-forage = Math.max(0, forage);
-habitat = Math.max(0, habitat);
-
+ 
+/* LIMITS */
+ 
+water = Math.max(0, Math.min(100, water));
+forage = Math.max(0, Math.min(100, forage));
+habitat = Math.max(0, Math.min(100, habitat));
+structure = Math.max(0, Math.min(100, structure));
+bass = Math.max(0, Math.min(100, bass));
+ 
 /* OVERALL */
-
+ 
 let total = Math.round(
 (
 water +
 forage +
 habitat +
 structure +
+competition +
 bass
-) / 5
+) / 6
 );
-
-total -= (100 - competition) * 0.25;
-
-total += Number(largestbass.value);
-
-if(total > 100){
-total = 100;
-}
-
-if(total < 0){
-total = 0;
-}
 
 /* HARDER GRADING */
 
@@ -561,8 +576,22 @@ recommendations.push(
 
 /* TROPHY POTENTIAL */
 
-let trophy =
-(5 + total * 0.10).toFixed(1);
+let trophy;
+
+if(total < 50){
+    trophy = 6 + (total - 30) * 0.10;
+}
+else if(total < 70){
+    trophy = 8 + (total - 50) * 0.15;
+}
+else if(total < 85){
+    trophy = 11 + (total - 70) * 0.20;
+}
+else{
+    trophy = 14 + (total - 85) * 0.25;
+}
+
+trophy = trophy.toFixed(1);
 
 /* RESULTS */
 
