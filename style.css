@@ -138,3 +138,22 @@ color:#0f5d47;
     height:auto;
     margin:0 auto 10px auto;
 }
+.category-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin:10px 0;
+}
+
+.optimize-btn{
+    width:auto;
+    margin:0;
+    padding:8px 14px;
+    background:#1b8065;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:14px;
+    font-weight:bold;
+}
