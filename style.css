@@ -176,3 +176,62 @@ header p{
     margin-top:15px;
     letter-spacing:1px;
 }
+/* ============================
+   MOBILE RESPONSIVE FIXES
+   ============================ */
+
+@media (max-width: 600px) {
+
+    header {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    header p {
+        font-size: 1.4rem;
+        margin-top: 10px;
+    }
+
+    /* Fix header hero layout */
+    .header-hero {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .hero-image {
+        width: 85%;
+        height: auto;
+        max-width: 280px;
+    }
+
+    /* Logo scaling */
+    .logo {
+        max-width: 80%;
+        height: auto;
+    }
+
+    /* Container padding */
+    .container {
+        padding: 15px;
+    }
+
+    /* Buttons */
+    button,
+    .info-btn,
+    .optimize-btn {
+        width: 100%;
+        font-size: 15px;
+        padding: 12px;
+    }
+
+    /* Category row stacking */
+    .category-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+}
