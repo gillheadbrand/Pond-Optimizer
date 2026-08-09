@@ -235,3 +235,71 @@ header p{
         gap: 10px;
     }
 }
+/* ============================
+   MOBILE LAYOUT FIX PATCH
+   ============================ */
+
+@media (max-width: 600px) {
+
+    /* Global spacing */
+    body {
+        padding: 0 10px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    /* Card spacing */
+    .card {
+        padding: 18px;
+    }
+
+    /* Header hero fix */
+    .header-hero {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .hero-image {
+        width: 100%;
+        max-width: 260px;
+        height: auto;
+    }
+
+    /* Logo scaling */
+    .logo {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+    }
+
+    /* Category row fix */
+    .category-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    /* Buttons full width */
+    button,
+    .info-btn,
+    .optimize-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    /* Score text scaling */
+    .score {
+        font-size: 48px;
+    }
+
+    /* Species image scaling */
+    .species-image {
+        max-width: 280px;
+        width: 100%;
+    }
+}
