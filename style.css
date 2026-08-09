@@ -303,3 +303,50 @@ header p{
         width: 100%;
     }
 }
+.main-hero {
+    text-align: center;
+    padding: 30px 20px;
+    background: #f8f7f2;
+    border-bottom: 3px solid #0f5d47;
+}
+
+.hero-content {
+    margin-bottom: 20px;
+}
+
+.hero-tagline {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #0f5d47;
+    margin-top: 10px;
+}
+
+.start-btn {
+    padding: 14px 24px;
+    background: #0f5d47;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 18px;
+}
+
+.start-btn:hover {
+    background: #0a4132;
+}
+
+@media (max-width: 600px) {
+    .main-hero {
+        padding: 20px 10px;
+    }
+
+    .hero-tagline {
+        font-size: 1.2rem;
+    }
+
+    .start-btn {
+        width: 100%;
+    }
+}
