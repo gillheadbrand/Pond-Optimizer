@@ -345,8 +345,26 @@ header p{
     .hero-tagline {
         font-size: 1.2rem;
     }
+.logo-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-stack .hero-tagline {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0f5d47;
+    margin: 0;
+}
 
     .start-btn {
         width: 100%;
+    }
+}
+@media (max-width: 600px) {
+    .logo-stack .hero-tagline {
+        font-size: 1.2rem;
     }
 }
