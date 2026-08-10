@@ -919,7 +919,7 @@ else if(total < 85){ trophy = 11 + (total - 70) * 0.20; }
 else{ trophy = 14 + (total - 85) * 0.25; }
 trophy = trophy.toFixed(1);
 
-/* RESTORATION PRIORITY SYSTEM — Clean Tier-Based Output */
+/* RESTORATION PRIORITY SYSTEM — Styled to Match Results Card */
 
 let priorities = [];
 
@@ -939,7 +939,7 @@ priorities.push({ name: "Competition Control", score: competition, tier: 3 });
 /* Sort lowest → highest score */
 priorities.sort((a, b) => a.score - b.score);
 
-/* Build clean tier-based list */
+/* Build structured list */
 let restoreHTML = "";
 
 priorities.forEach(p => {
@@ -949,20 +949,38 @@ priorities.forEach(p => {
         p.score <= 80 ? "Moderate" :
         "Healthy";
 
+    let severityColor =
+        severity === "Critical" ? "#d9534f" :
+        severity === "Needs Improvement" ? "#f0ad4e" :
+        severity === "Moderate" ? "#5bc0de" :
+        "#5cb85c";
+
     restoreHTML += `
-        <li>
-            <strong>${p.name}</strong><br>
-            <span style="color:#555;">
-                Tier ${p.tier} — ${severity}
-            </span>
-        </li>
-        <br>
+        <div class="category-row" style="margin:12px 0;">
+            <div>
+                <strong>${p.name}</strong><br>
+                <span style="color:#666; font-size:14px;">Tier ${p.tier}</span>
+            </div>
+
+            <div style="
+                background:${severityColor};
+                color:white;
+                padding:6px 14px;
+                border-radius:6px;
+                font-weight:bold;
+                font-size:14px;
+                min-width:130px;
+                text-align:center;
+            ">
+                ${severity}
+            </div>
+        </div>
     `;
 });
 
 document.getElementById("restorationList").innerHTML = restoreHTML;
 
-/* EXPLANATION — simplified and styled */
+/* EXPLANATION — simplified */
 let explanation = "";
 
 let badWater = water < 50;
@@ -993,6 +1011,7 @@ if (badWater || badAge || badGenetics) {
 }
 
 document.getElementById("restorationExplanation").innerHTML = explanation;
+
 
 /* RESULTS — SHOW LAST */
 document.getElementById("results").style.display = "block";
