@@ -233,10 +233,13 @@ class="species-image">
 </select>
 
 <label>Aquatic Vegetation Coverage</label>
-<p style="font-size:14px; color:#666; margin-bottom:6px;">
-    Be sure not to confuse filamentous algae with grass. While it looks like habitat,
-    it should be scored as algae.
-</p>
+<div class="warning-box">
+    <strong style="color:#b71c1c;">Filamentous Algae — Not Vegetation</strong>
+    <p style="margin-top:6px;">
+        Filamentous algae often looks like submerged grass or habitat, but it is not vegetation.
+        Score algae separately from vegetation to avoid overestimating habitat quality.
+    </p>
+</div>
 
 <!-- Water Willow -->
 <button class="info-btn" onclick="toggleInfo('waterwillow')" type="button">
@@ -352,6 +355,33 @@ How do I identify this?
 </select>
 
 <label>Algae</label>
+    <div class="warning-box">
+    <strong style="color:#b71c1c;">Phytoplankton vs Algae Blooms</strong>
+    <p style="margin-top:6px;">
+        Phytoplankton blooms are algae blooms — but not all algae blooms are phytoplankton blooms.
+        Healthy phytoplankton gives water a green tint and supports the entire food chain. 
+        However, filamentous algae and mat-forming algae can be detrimental to lake habitat,
+        smothering spawning beds and reducing water quality.
+    </p>
+
+    <strong style="color:#b71c1c;">Use the Jar Test</strong>
+    <p style="margin-top:6px;">
+        The jar test helps determine whether your pond has beneficial phytoplankton or harmful algae.
+        Simply collect pond water in a clear jar and let it sit for 30–60 minutes:
+    </p>
+
+    <ul style="margin-left:20px; margin-top:6px;">
+        <li><strong>Green tint stays suspended:</strong> healthy phytoplankton bloom.</li>
+        <li><strong>Algae settles to the bottom:</strong> filamentous or nuisance algae.</li>
+        <li><strong>Water clears completely:</strong> low fertility or poor plankton levels.</li>
+    </ul>
+
+    <p style="margin-top:6px;">
+        This simple test helps determine whether your pond needs fertilization, algae control,
+        or habitat correction.
+    </p>
+</div>
+
 <select id="algae">
 <option value="5">Light</option>
 <option value="10">Moderate Bloom</option>
@@ -399,9 +429,6 @@ How do I identify this?
         <li>Fathead Minnows — stocked yearly, fertile ponds, tailored structure recommended</li>
         <li>None of the above species practically ever appears naturally</li>
     </ul>
-
-</div>
-
 
 </div>
 
@@ -710,9 +737,9 @@ class="species-image">
 
 <div id="agetips" class="info-box">
     <ul>
-        <li>Apply agricultural lime every 3–5 years to maintain healthy pH</li>
+        <li>Apply agricultural lime + limestone gravel or rip-rap every 10 years to maintain healthy pH, around 7.0; approx 1-2 tons per acre.</li>
         <li>Refresh bass genetics every 10–15 years with F1 or Florida bass</li>
-        <li>Rebuild forage base in older ponds (bluegill, redear, shiners)</li>
+        <li>Rebuild forage base in older ponds (bluegill, redear, shiners, etc.)</li>
         <li>Add new habitat: brush piles, rock piles, artificial structures</li>
         <li>Dredge or deepen areas if sediment buildup is severe</li>
     </ul>
