@@ -701,20 +701,20 @@ class="species-image">
 <p id="recommendation"></p>
 <p id="forecast"></p>
 
-<div class="category-row">
-    <span><strong>Restoration Priority</strong></span>
-    <button class="optimize-btn" onclick="toggleInfo('restorationtips')">Show Priority List</button>
-</div>
+</div> <!-- CLOSES #results -->
 
-<div id="restorationtips" class="info-box">
+<div id="restoration" class="card" style="display:none;">
+
+    <h2>Restoration Priority</h2>
+
     <ul id="restorationList"></ul>
     <br>
     <div id="restorationExplanation"></div>
+
 </div>
 
-</div> <!-- CLOSES #results — ONLY ONE -->
-
 <script>
+
 
 function toggleInfo(id){
 const box = document.getElementById(id);
