@@ -39,6 +39,14 @@
 
 <h2>Lake Analyzer</h2>
 
+<label>Pond Age</label>
+<select id="pondage">
+<option value="20">0–10 Years (Prime)</option>
+<option value="15">10–20 Years (Mild Decline)</option>
+<option value="10">20–40 Years (Significant Decline)</option>
+<option value="5">40+ Years (Old Pond Syndrome)</option>
+</select>
+    
 <label>Size</label>
 <select id="acres">
 <option value="5">Under 1 Acre</option>
@@ -83,27 +91,36 @@
 <option value="0">48+" </option>
 </select>
 
-<label>Bluegill Population</label>
-<button class="info-btn" onclick="toggleInfo('bluegill')" type="button">How do I identify this?</button>
+<label>Stocked Forage</label>
+<button class="info-btn" onclick="toggleInfo('stockedforage')" type="button">
+    What stocked forage should I look for?
+</button>
 
-<div id="bluegill" class="info-box">
+<div id="stockedforage" class="info-box">
 
-<img src="images/bluegill.png"
-alt="Bluegill"
-class="species-image">
-    
-<ul>
-<li>Round body shape</li>
-<li>Dark ear flap</li>
-<li>Vertical bars on side</li>
-</ul>
+    <img src="images/bluegill.png"
+    alt="Bluegill"
+    class="species-image">
+
+    <img src="images/redear.png"
+    alt="Redear Sunfish"
+    class="species-image">
+
+    <ul>
+        <li>Bluegill — round body, dark ear flap, vertical bars</li>
+        <li>Redear Sunfish — red/orange ear flap, snail-eater</li>
+        <li>Both are intentionally stocked with bass</li>
+        <li>Essential forage base for healthy bass growth</li>
+    </ul>
+
 </div>
 
-<select id="bluegillscore">
-<option value="5">Low</option>
-<option value="15">Average</option>
-<option value="35">High</option>
+<select id="stockedforagescore">
+    <option value="5">Low</option>
+    <option value="15">Average</option>
+    <option value="35">High</option>
 </select>
+
 
 <label>Crawfish Population</label>
 <button class="info-btn" onclick="toggleInfo('crawfish')" type="button">How do I identify this?</button>
@@ -127,44 +144,183 @@ class="species-image">
 </select>
 
 <label>Aquatic Insects</label>
-<button class="info-btn" onclick="toggleInfo('insectsinfo')" type="button">How do I identify this?</button>
 
-<div id="insectsinfo" class="info-box">
-<ul>
-<li>Dragonflies</li>
-<li>Damselflies</li>
-<li>Mayflies</li>
-<li>Aquatic beetles</li>
-<li>Indicator of pond productivity</li>
-</ul>
+<!-- Dragonflies -->
+<button class="info-btn" onclick="toggleInfo('dragonflies')" type="button">
+    Dragonflies — How do I identify this?
+</button>
+
+<div id="dragonflies" class="info-box">
+
+    <img src="images/dragonfly.png"
+    alt="Dragonfly"
+    class="species-image">
+
+    <ul>
+        <li>Large wings, fast flyers</li>
+        <li>Nymphs live underwater</li>
+        <li>Strong indicator of healthy water</li>
+    </ul>
+
 </div>
 
+
+<!-- Damselflies -->
+<button class="info-btn" onclick="toggleInfo('damselflies')" type="button">
+    Damselflies — How do I identify this?
+</button>
+
+<div id="damselflies" class="info-box">
+
+    <img src="images/damselfly.png"
+    alt="Damselfly"
+    class="species-image">
+
+    <ul>
+        <li>Slender body, wings fold back</li>
+        <li>Often seen perched on vegetation</li>
+        <li>Common in productive ponds</li>
+    </ul>
+
+</div>
+
+
+<!-- Mayflies -->
+<button class="info-btn" onclick="toggleInfo('mayflies')" type="button">
+    Mayflies — How do I identify this?
+</button>
+
+<div id="mayflies" class="info-box">
+
+    <img src="images/mayfly.png"
+    alt="Mayfly"
+    class="species-image">
+
+    <ul>
+        <li>Delicate wings, short lifespan</li>
+        <li>Nymphs live in mud and vegetation</li>
+        <li>Excellent indicator of water quality</li>
+    </ul>
+
+</div>
+
+
+<!-- Aquatic Beetles -->
+<button class="info-btn" onclick="toggleInfo('aquaticbeetles')" type="button">
+    Aquatic Beetles — How do I identify this?
+</button>
+
+<div id="aquaticbeetles" class="info-box">
+
+    <img src="images/aquaticbeetle.png"
+    alt="Aquatic Beetle"
+    class="species-image">
+
+    <ul>
+        <li>Oval body shape</li>
+        <li>Swim using hind legs</li>
+        <li>Common in vegetated ponds</li>
+    </ul>
+
+</div>
+
+
+<!-- Single Score Dropdown -->
 <select id="insects">
-<option value="0">Rare</option>
-<option value="5">Average</option>
-<option value="10">Abundant</option>
+    <option value="0">Rare</option>
+    <option value="5">Average</option>
+    <option value="10">Abundant</option>
 </select>
 
 <label>Aquatic Vegetation Coverage</label>
-<button class="info-btn" onclick="toggleInfo('vegetationinfo')" type="button">How do I identify this?</button>
 
-<div id="vegetationinfo" class="info-box">
-<ul>
-<li>Water Willow</li>
-<li>Pondweed</li>
-<li>Coontail</li>
-<li>Lily Pads</li>
-<li>Provides cover for forage fish</li>
-<li>20-40% coverage is generally ideal</li>
-</ul>
+<!-- Water Willow -->
+<button class="info-btn" onclick="toggleInfo('waterwillow')" type="button">
+    Water Willow — How do I identify this?
+</button>
+
+<div id="waterwillow" class="info-box">
+
+    <img src="images/waterwillow.png"
+    alt="Water Willow"
+    class="species-image">
+
+    <ul>
+        <li>Emergent plant with narrow leaves</li>
+        <li>Forms shoreline patches</li>
+        <li>Excellent cover for forage fish</li>
+    </ul>
+
 </div>
 
+
+<!-- Pondweed -->
+<button class="info-btn" onclick="toggleInfo('pondweed')" type="button">
+    Pondweed — How do I identify this?
+</button>
+
+<div id="pondweed" class="info-box">
+
+    <img src="images/pondweed.png"
+    alt="Pondweed"
+    class="species-image">
+
+    <ul>
+        <li>Long, ribbon-like leaves</li>
+        <li>Submerged or slightly emergent</li>
+        <li>Provides great habitat for minnows</li>
+    </ul>
+
+</div>
+
+
+<!-- Coontail -->
+<button class="info-btn" onclick="toggleInfo('coontail')" type="button">
+    Coontail — How do I identify this?
+</button>
+
+<div id="coontail" class="info-box">
+
+    <img src="images/coontail.png"
+    alt="Coontail"
+    class="species-image">
+
+    <ul>
+        <li>Bushy, bottlebrush-like appearance</li>
+        <li>Free-floating, no roots</li>
+        <li>Common in older ponds</li>
+    </ul>
+
+</div>
+
+
+<!-- Lily Pads -->
+<button class="info-btn" onclick="toggleInfo('lilypads')" type="button">
+    Lily Pads — How do I identify this?
+</button>
+
+<div id="lilypads" class="info-box">
+
+    <img src="images/lilypad.png"
+    alt="Lily Pads"
+    class="species-image">
+
+    <ul>
+        <li>Floating round leaves</li>
+        <li>Often have white or yellow flowers</li>
+        <li>Provide shade and ambush cover</li>
+    </ul>
+
+</div>
+
+
+<!-- Single Score Dropdown -->
 <select id="vegetation">
-<option value="2">0%</option>
-<option value="10">1-20%</option>
-<option value="15">20-40%</option>
-<option value="8">40-60%</option>
-<option value="3">60%+</option>
+    <option value="2">0%</option>
+    <option value="10">1-20%</option>
+    <option value="15">20-40%</option>
+    <option value="8">40-60%</option>
+    <option value="3">60%+</option>
 </select>
 
 <label>Structure Availability</label>
@@ -198,52 +354,132 @@ How do I identify this?
 <option value="3">Heavy Mats</option>
 </select>
 
-<label>Threadfin Shad</label>
-<button class="info-btn" onclick="toggleInfo('threadfininfo')" type="button">How do I identify this?</button>
+<label>Managed Forage (Recommended)</label>
+<button class="info-btn" onclick="toggleInfo('managedforage')" type="button">
+    What forage could I add to improve bass growth?
+</button>
 
-<div id="threadfininfo" class="info-box">
+<div id="managedforage" class="info-box">
 
-<img src="images/threadfinshad.png"
-alt="Threadfin Shad"
-class="species-image">
-    
-<ul>
-<li>Silver baitfish</li>
-<li>Long thread extending from dorsal fin</li>
-<li>Found schooling in open water</li>
-<li>Often flicker near surface</li>
-<li>Excellent trophy bass forage</li>
-</ul>
+    <img src="images/goldenshiner.png"
+    alt="Golden Shiners"
+    class="species-image">
+
+    <img src="images/threadfinshad.png"
+    alt="Threadfin Shad"
+    class="species-image">
+      
+    <img src="images/fatheadminnow.png"
+    alt="Fathead Minnow"
+    class="species-image">
+
+    <ul>
+        <li>Golden Shiners — hardy, excellent supplemental forage</li>
+        <li>Threadfin Shad — stocked yearly, possibly the best trophy bass forage</li>
+        <li>Fathead Minnows — stocked yearly, fertile ponds, tailored structure recommended</li>
+        <li>None of the above species appears naturally</li>
+    </ul>
+
 </div>
 
-<select id="threadfin">
-<option value="0">Absent</option>
-<option value="5">Present</option>
-<option value="10">Abundant</option>
+<select id="managedforagescore">
+    <option value="0">Not Stocked</option>
+    <option value="10">Stocked</option>
+    <option value="20">Abundant</option>
 </select>
 
-<label>Golden Shiners</label>
-<button class="info-btn" onclick="toggleInfo('shinersinfo')" type="button">How do I identify this?</button>
 
-<div id="shinersinfo" class="info-box">
+<label>Natural Forage</label>
 
-<img src="images/goldenshiner.png"
-alt="Golden Shiners"
-class="species-image">
-    
-<ul>
-<li>Golden or bronze coloration</li>
-<li>Slender minnow-like body</li>
-<li>Often around vegetation</li>
-<li>Larger than most baitfish</li>
-<li>Excellent supplemental forage</li>
-</ul>
+<!-- Mosquitofish -->
+<button class="info-btn" onclick="toggleInfo('mosquitofish')" type="button">
+    Mosquitofish — How do I identify this?
+</button>
+
+<div id="mosquitofish" class="info-box">
+
+    <img src="images/mosquitofish.png"
+    alt="Mosquitofish"
+    class="species-image">
+
+    <ul>
+        <li>Tiny guppy-like fish</li>
+        <li>Extremely common in unmanaged ponds</li>
+        <li>Hang around shallow edges</li>
+        <li>Breed constantly</li>
+    </ul>
+
 </div>
 
-<select id="shiners">
-<option value="0">Absent</option>
-<option value="5">Present</option>
-<option value="10">Abundant</option>
+
+<!-- Native Shiners -->
+<button class="info-btn" onclick="toggleInfo('nativeshiners')" type="button">
+    Native Shiners — How do I identify this?
+</button>
+
+<div id="nativeshiners" class="info-box">
+
+    <img src="images/nativeshiner.png"
+    alt="Native Shiners"
+    class="species-image">
+
+    <ul>
+        <li>Slender silver minnow</li>
+        <li>Often found near vegetation</li>
+        <li>Common in creeks and runoff</li>
+        <li>Includes weed, satinfin, ironcolor shiners</li>
+    </ul>
+
+</div>
+
+
+<!-- Creek Chubs -->
+<button class="info-btn" onclick="toggleInfo('creekchubs')" type="button">
+    Creek Chubs — How do I identify this?
+</button>
+
+<div id="creekchubs" class="info-box">
+
+    <img src="images/creekchub.png"
+    alt="Creek Chub"
+    class="species-image">
+
+    <ul>
+        <li>Chunky minnow with a blunt head</li>
+        <li>Enter ponds through creeks or flooding</li>
+        <li>Very common in unmanaged ponds</li>
+        <li>Often mistaken for “wild minnows”</li>
+    </ul>
+
+</div>
+
+
+<!-- Topminnows / Killifish -->
+<button class="info-btn" onclick="toggleInfo('topminnows')" type="button">
+    Topminnows / Killifish — How do I identify this?
+</button>
+
+<div id="topminnows" class="info-box">
+
+    <img src="images/topminnow.png"
+    alt="Topminnow"
+    class="species-image">
+
+    <ul>
+        <li>Slender surface-feeding minnow</li>
+        <li>Often seen darting near the top</li>
+        <li>Extremely hardy</li>
+        <li>Common in shallow, weedy ponds</li>
+    </ul>
+
+</div>
+
+
+<!-- Single Score Dropdown -->
+<select id="naturalforagescore">
+    <option value="5">Low</option>
+    <option value="15">Average</option>
+    <option value="25">High</option>
 </select>
 
 <label>Crappie Population</label>
@@ -460,6 +696,19 @@ class="species-image">
     </ul>
 </div>
 
+    <div class="category-row">
+    <span id="agescore"><strong>Pond Age</strong></span>
+    <button class="optimize-btn"
+            onclick="toggleInfo('agetips')">
+        Help Me Optimize
+    </button>
+</div>
+
+<div id="agetips" class="info-box">
+    <div id="ageRec"></div>
+</div>
+
+
 <hr>
 
 <p id="grade"></p>
@@ -485,9 +734,9 @@ box.style.display = "block";
 }
     
 function calculate(){
- 
+
 /* WATER */
- 
+
 let water = (
 (
 Number(source.value) +
@@ -496,84 +745,129 @@ Number(visibility.value) +
 Number(acres.value)
 ) / 65
 ) * 100;
- 
+
+/* POND AGE */
+let age = Number(pondage.value);
+age = Math.max(0, Math.min(100, age));
+
+
 /* FORAGE */
- 
+/* New forage system: Natural + Stocked + Managed */
+
 let forage = (
 (
-Number(bluegillscore.value) +
+Number(naturalforagescore.value) +
+Number(stockedforagescore.value) +
+Number(managedforagescore.value) +
 Number(crawfishscore.value) +
-Number(threadfin.value) +
-Number(shiners.value) +
 Number(insects.value)
-) / 75
+) / 100
 ) * 100;
- 
+
 /* HABITAT */
- 
+
 let habitat = (
 (
 Number(vegetation.value) +
 Number(algae.value)
 ) / 25
 ) * 100;
- 
+
 /* STRUCTURE */
- 
+
 let structure = (
 Number(document.getElementById("structure").value) / 20
 ) * 100;
- 
+
 /* COMPETITION */
- 
+
 let competition = 100;
- 
+
 competition += Number(crappie.value);
 competition += Number(greensunfish.value);
 competition += Number(bullheads.value);
- 
+
 competition = Math.max(0, competition);
- 
+
 /* BASS POPULATION */
- 
-let bass = (
-(
-Number(smallbass.value) +
-Number(mediumbass.value) +
-Number(largebass.value) +
-(Number(largestbass.value) * 2)
-) / 100
-) * 100;
- 
+
+/* BASS POPULATION */
+
+/* 
+Small bass = negative if high
+Medium bass = positive if average or high
+Large bass = strong positive
+Largest bass = trophy multiplier
+*/
+
+let bass = 0;
+
+/* Small Bass Penalty */
+if(Number(smallbass.value) === 15){      // Low small bass
+    bass += 20;                          // Good sign
+}
+else if(Number(smallbass.value) === 10){ // Average small bass
+    bass += 10;
+}
+else{                                    // High small bass
+    bass -= 10;                          // Overcrowding penalty
+}
+
+/* Medium Bass Bonus */
+if(Number(mediumbass.value) === 5){      // Low medium bass
+    bass += 5;
+}
+else if(Number(mediumbass.value) === 15){ // Average medium bass
+    bass += 15;
+}
+else{                                     // High medium bass
+    bass += 25;                           // Very healthy structure
+}
+
+/* Large Bass Bonus */
+if(Number(largebass.value) === 5){        // Low large bass
+    bass += 10;
+}
+else if(Number(largebass.value) === 15){  // Average large bass
+    bass += 25;
+}
+else{                                     // High large bass
+    bass += 40;                           // Trophy potential
+}
+
+/* Largest Bass Ever Caught Multiplier */
+bass += Number(largestbass.value) * 3;
+
+/* Normalize to 0–100 */
+bass = Math.max(0, Math.min(100, bass));
+
+
 /* FORAGE PENALTIES */
- 
-if(Number(bluegillscore.value) <= 5){
+
+if(Number(stockedforagescore.value) <= 5){
 forage -= 10;
 }
- 
+
 if(Number(crawfishscore.value) === 0){
 forage -= 5;
 }
- 
+
+if(Number(naturalforagescore.value) <= 5){
+forage -= 5;
+}
+
 /* LIMITS */
- 
+
 water = Math.max(0, Math.min(100, water));
 forage = Math.max(0, Math.min(100, forage));
 habitat = Math.max(0, Math.min(100, habitat));
 structure = Math.max(0, Math.min(100, structure));
 bass = Math.max(0, Math.min(100, bass));
- 
+
 /* OVERALL */
- 
+
 let total = Math.round(
-(
-water +
-forage +
-habitat +
-structure +
-competition +
-bass
-) / 6
+(water + forage + habitat + structure + competition + bass + age) / 7
 );
 
 /* HARDER GRADING */
@@ -619,6 +913,28 @@ categories[a] < categories[b] ? a : b
 
 let recommendations = [];
 
+/* Pond Age Recommendation */
+if(Number(pondage.value) >= 15){
+    recommendations.push(
+        "Pond age is in a healthy range. No major restoration needed at this time."
+    );
+}
+else if(Number(pondage.value) >= 10){
+    recommendations.push(
+        "Pond age indicates mild decline. Consider periodic lime application and monitoring forage diversity."
+    );
+}
+else if(Number(pondage.value) >= 5){
+    recommendations.push(
+        "Pond age suggests significant decline. Lime application, genetic refresh, and habitat restoration are recommended."
+    );
+}
+else{
+    recommendations.push(
+        "Pond age indicates Old Pond Syndrome. Strongly consider lime treatment, forage rebuilding, structure restoration, and periodic bass restocking."
+    );
+}
+    
 if(Number(crappie.value) <= -15){
 recommendations.push(
 "High crappie pressure detected. Crappie can dramatically reduce bluegill recruitment and stunt bass growth."
@@ -637,27 +953,21 @@ recommendations.push(
 );
 }
 
-if(Number(bluegillscore.value) <= 5){
+if(Number(stockedforagescore.value) <= 5){
 recommendations.push(
-"Forage deficiency detected. Bluegill abundance appears too low for consistent trophy bass growth."
+"Stocked forage (bluegill/redear) appears low. This limits long-term bass growth."
+);
+}
+
+if(Number(naturalforagescore.value) <= 5){
+recommendations.push(
+"Natural forage appears limited. Hardy managed forage options help stabilize the forage base."
 );
 }
 
 if(Number(crawfishscore.value) === 0){
 recommendations.push(
 "No crawfish detected. Crawfish are among the best forage sources for larger bass."
-);
-}
-
-if(Number(threadfin.value) === 0){
-recommendations.push(
-"No threadfin shad observed. Open-water forage opportunities may be limited."
-);
-}
-
-if(Number(shiners.value) === 0){
-recommendations.push(
-"No golden shiners detected. Supplemental forage diversity may be lacking."
 );
 }
 
@@ -707,9 +1017,12 @@ trophy = trophy.toFixed(1);
 /* RESULTS */
 
 document.getElementById("results").style.display = "block";
-
+    
 document.getElementById("score").innerHTML =
 total + "/100";
+
+document.getElementById("agescore").innerHTML =
+"<strong>Pond Age:</strong> " + age;
 
 document.getElementById("waterscore").innerHTML =
 "<strong>Water:</strong> " + water;
@@ -728,7 +1041,7 @@ document.getElementById("competitionscore").innerHTML =
 
 document.getElementById("bassscore").innerHTML =
 "<strong>Bass Population:</strong> " + bass;
-    
+
 document.getElementById("grade").innerHTML =
 "<strong>Grade:</strong> " + grade;
 
