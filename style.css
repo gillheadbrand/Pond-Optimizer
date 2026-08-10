@@ -429,3 +429,25 @@ background:#b71c1c; /* Red hover */
     font-size: 1.2rem;
 }
 }
+/* ============================
+   CONTACT FORM LAYOUT
+   ============================ */
+
+.contact-form {
+    margin-top: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.contact-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
