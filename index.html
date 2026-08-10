@@ -741,7 +741,6 @@ box.style.display = "block";
 function calculate(){
 
 /* WATER */
-
 let water = (
 (
 Number(source.value) +
@@ -755,10 +754,7 @@ Number(acres.value)
 let age = Number(pondage.value);
 age = Math.max(0, Math.min(100, age));
 
-
 /* FORAGE */
-/* New forage system: Natural + Stocked + Managed */
-
 let forage = (
 (
 Number(naturalforagescore.value) +
@@ -770,7 +766,6 @@ Number(insects.value)
 ) * 100;
 
 /* HABITAT */
-
 let habitat = (
 (
 Number(vegetation.value) +
@@ -779,358 +774,241 @@ Number(algae.value)
 ) * 100;
 
 /* STRUCTURE */
-
 let structure = (
 Number(document.getElementById("structure").value) / 20
 ) * 100;
 
 /* COMPETITION */
-
 let competition = 100;
-
 competition += Number(crappie.value);
 competition += Number(greensunfish.value);
 competition += Number(bullheads.value);
-
 competition = Math.max(0, competition);
 
 /* BASS POPULATION */
-
-/* BASS POPULATION */
-
-/* 
-Small bass = negative if high
-Medium bass = positive if average or high
-Large bass = strong positive
-Largest bass = trophy multiplier
-*/
-
 let bass = 0;
 
-/* Small Bass Penalty */
-if(Number(smallbass.value) === 15){      // Low small bass
-    bass += 20;                          // Good sign
+/* Small Bass */
+if(Number(smallbass.value) === 15){
+    bass += 20;
 }
-else if(Number(smallbass.value) === 10){ // Average small bass
+else if(Number(smallbass.value) === 10){
     bass += 10;
 }
-else{                                    // High small bass
-    bass -= 10;                          // Overcrowding penalty
+else{
+    bass -= 10;
 }
 
-/* Medium Bass Bonus */
-if(Number(mediumbass.value) === 5){      // Low medium bass
+/* Medium Bass */
+if(Number(mediumbass.value) === 5){
     bass += 5;
 }
-else if(Number(mediumbass.value) === 15){ // Average medium bass
+else if(Number(mediumbass.value) === 15){
     bass += 15;
 }
-else{                                     // High medium bass
-    bass += 25;                           // Very healthy structure
-}
-
-/* Large Bass Bonus */
-if(Number(largebass.value) === 5){        // Low large bass
-    bass += 10;
-}
-else if(Number(largebass.value) === 15){  // Average large bass
+else{
     bass += 25;
 }
-else{                                     // High large bass
-    bass += 40;                           // Trophy potential
+
+/* Large Bass */
+if(Number(largebass.value) === 5){
+    bass += 10;
+}
+else if(Number(largebass.value) === 15){
+    bass += 25;
+}
+else{
+    bass += 40;
 }
 
-/* Largest Bass Ever Caught Multiplier */
+/* Largest Bass Ever */
 bass += Number(largestbass.value) * 3;
 
-/* Normalize to 0–100 */
+/* Normalize */
 bass = Math.max(0, Math.min(100, bass));
 
-
 /* FORAGE PENALTIES */
-
-if(Number(stockedforagescore.value) <= 5){
-forage -= 10;
-}
-
-if(Number(crawfishscore.value) === 0){
-forage -= 5;
-}
-
-if(Number(naturalforagescore.value) <= 5){
-forage -= 5;
-}
+if(Number(stockedforagescore.value) <= 5){ forage -= 10; }
+if(Number(crawfishscore.value) === 0){ forage -= 5; }
+if(Number(naturalforagescore.value) <= 5){ forage -= 5; }
 
 /* LIMITS */
-
 water = Math.max(0, Math.min(100, water));
 forage = Math.max(0, Math.min(100, forage));
 habitat = Math.max(0, Math.min(100, habitat));
 structure = Math.max(0, Math.min(100, structure));
 bass = Math.max(0, Math.min(100, bass));
 
-/* OVERALL */
-
+/* OVERALL SCORE */
 let total = Math.round(
 (water + forage + habitat + structure + competition + bass + age) / 7
 );
 
-/* HARDER GRADING */
-
+/* GRADE */
 let grade = "";
+if(total >= 95){ grade = "🏆 Elite Trophy Water"; }
+else if(total >= 85){ grade = "✅ Excellent"; }
+else if(total >= 70){ grade = "👍 Good"; }
+else if(total >= 55){ grade = "⚠️ Fair"; }
+else if(total >= 40){ grade = "❌ Poor"; }
+else{ grade = "🚨 Serious Limiting Factors"; }
 
-if(total >= 95){
-grade = "🏆 Elite Trophy Water";
-}
-else if(total >= 85){
-grade = "✅ Excellent";
-}
-else if(total >= 70){
-grade = "👍 Good";
-}
-else if(total >= 55){
-grade = "⚠️ Fair";
-}
-else if(total >= 40){
-grade = "❌ Poor";
-}
-else{
-grade = "🚨 Serious Limiting Factors";
-}
-
-/* FIND BOTTLENECK */
-
+/* BOTTLENECK */
 const categories = {
-Water: water,
-Forage: forage,
-Habitat: habitat,
-Structure: structure,
-Competition: competition,
-Bass: bass
+    Water: water,
+    Forage: forage,
+    Habitat: habitat,
+    Structure: structure,
+    Competition: competition,
+    Bass: bass
 };
 
 let factor = Object.keys(categories)
-.reduce((a,b)=>
-categories[a] < categories[b] ? a : b
-);
+.reduce((a,b)=> categories[a] < categories[b] ? a : b);
 
 /* RECOMMENDATIONS */
-
 let recommendations = [];
 
-/* Pond Age Recommendation */
+/* Pond Age */
 if(Number(pondage.value) >= 15){
-    recommendations.push(
-        "Pond age is in a healthy range. No major restoration needed at this time."
-    );
+    recommendations.push("Pond age is in a healthy range. No major restoration needed.");
 }
 else if(Number(pondage.value) >= 10){
-    recommendations.push(
-        "Pond age indicates mild decline. Consider periodic lime application and monitoring forage diversity."
-    );
+    recommendations.push("Pond age indicates mild decline. Consider lime and forage monitoring.");
 }
 else if(Number(pondage.value) >= 5){
-    recommendations.push(
-        "Pond age suggests significant decline. Lime application, genetic refresh, and habitat restoration are recommended."
-    );
+    recommendations.push("Pond age suggests decline. Lime, genetics, and habitat restoration recommended.");
 }
 else{
-    recommendations.push(
-        "Pond age indicates Old Pond Syndrome. Strongly consider lime treatment, forage rebuilding, structure restoration, and periodic bass restocking."
-    );
+    recommendations.push("Old Pond Syndrome detected. Lime, forage rebuilding, structure, and bass restocking needed.");
 }
-    
+
+/* Competition */
 if(Number(crappie.value) <= -15){
-recommendations.push(
-"High crappie pressure detected. Crappie can dramatically reduce bluegill recruitment and stunt bass growth."
-);
+    recommendations.push("High crappie pressure detected. They suppress bluegill recruitment.");
 }
-
 if(Number(greensunfish.value) <= -15){
-recommendations.push(
-"Green sunfish competition detected. These fish often outcompete young bluegill and bass fry."
-);
+    recommendations.push("Green sunfish competition detected. They outcompete bluegill and bass fry.");
 }
-
 if(Number(bullheads.value) <= -15){
-recommendations.push(
-"Bullhead populations may be consuming forage resources and reducing pond efficiency."
-);
+    recommendations.push("Bullheads may be consuming forage and reducing pond efficiency.");
 }
 
+/* Forage */
 if(Number(stockedforagescore.value) <= 5){
-recommendations.push(
-"Stocked forage (bluegill/redear) appears low. This limits long-term bass growth."
-);
+    recommendations.push("Stocked forage appears low. This limits long-term bass growth.");
 }
-
 if(Number(naturalforagescore.value) <= 5){
-recommendations.push(
-"Natural forage appears limited. Hardy managed forage options help stabilize the forage base."
-);
+    recommendations.push("Natural forage appears limited. Managed forage options recommended.");
 }
-
 if(Number(crawfishscore.value) === 0){
-recommendations.push(
-"No crawfish detected. Crawfish are among the best forage sources for larger bass."
-);
+    recommendations.push("No crawfish detected. Crawfish are elite forage for larger bass.");
 }
 
+/* Habitat */
 if(Number(vegetation.value) <= 2){
-recommendations.push(
-"Very little aquatic vegetation is present. Nursery habitat and forage protection appear limited."
-);
+    recommendations.push("Very little vegetation present. Nursery habitat is limited.");
 }
 
+/* Water Source */
 if(Number(inlets.value) === 0){
-recommendations.push(
-"No active inflows detected. Pond productivity may rely entirely on rainfall."
-);
+    recommendations.push("No active inflows detected. Productivity may rely entirely on rainfall.");
 }
-
 if(Number(source.value) === 5){
-recommendations.push(
-"Runoff-only water source detected. Water quality and pond productivity may fluctuate significantly."
-);
+    recommendations.push("Runoff-only water source detected. Water quality may fluctuate.");
 }
 
 if(recommendations.length === 0){
-recommendations.push(
-"System appears balanced. Continue biomass monitoring, forage management and bass harvest strategy."
-);
+    recommendations.push("System appears balanced. Continue monitoring and harvest strategy.");
 }
 
 /* TROPHY POTENTIAL */
-
 let trophy;
-
-if(total < 50){
-    trophy = 6 + (total - 30) * 0.10;
-}
-else if(total < 70){
-    trophy = 8 + (total - 50) * 0.15;
-}
-else if(total < 85){
-    trophy = 11 + (total - 70) * 0.20;
-}
-else{
-    trophy = 14 + (total - 85) * 0.25;
-}
-
+if(total < 50){ trophy = 6 + (total - 30) * 0.10; }
+else if(total < 70){ trophy = 8 + (total - 50) * 0.15; }
+else if(total < 85){ trophy = 11 + (total - 70) * 0.20; }
+else{ trophy = 14 + (total - 85) * 0.25; }
 trophy = trophy.toFixed(1);
 
-/* RESULTS */
-
-document.getElementById("results").style.display = "block";
-    
-document.getElementById("score").innerHTML =
-total + "/100";
-
-document.getElementById("agescore").innerHTML =
-"<strong>Pond Age:</strong> " + age;
-
-document.getElementById("waterscore").innerHTML =
-"<strong>Water:</strong> " + water;
-
-document.getElementById("foragescore").innerHTML =
-"<strong>Forage:</strong> " + forage;
-
-document.getElementById("habitatscore").innerHTML =
-"<strong>Habitat:</strong> " + habitat;
-
-document.getElementById("structurescore").innerHTML =
-"<strong>Structure:</strong> " + structure;
-
-document.getElementById("competitionscore").innerHTML =
-"<strong>Competition:</strong> " + competition;
-
-document.getElementById("bassscore").innerHTML =
-"<strong>Bass Population:</strong> " + bass;
-
-document.getElementById("grade").innerHTML =
-"<strong>Grade:</strong> " + grade;
-
-document.getElementById("factor").innerHTML =
-"<strong>Main Bottleneck:</strong> " + factor;
-
-document.getElementById("recommendation").innerHTML =
-"<strong>Recommendations:</strong><br><br>" +
-recommendations.join("<br><br>");
-
-document.getElementById("forecast").innerHTML =
-"<strong>Estimated Trophy Bass Potential:</strong> " +
-trophy +
-" lb maximum bass";
-
-/* RESTORATION PRIORITY SYSTEM WITH TIERS + ROOT-CAUSE LOGIC */
-
+/* RESTORATION PRIORITY SYSTEM */
 let priorities = [];
 
-/* TIER 1 — Foundational */
+/* Tier 1 */
 priorities.push({ name: "Water Quality", score: water, tier: 1, weight: 3 });
 priorities.push({ name: "Pond Age Health", score: age, tier: 1, weight: 3 });
 priorities.push({ name: "Bass Genetics / Population", score: bass, tier: 1, weight: 3 });
 
-/* TIER 2 — Productivity */
+/* Tier 2 */
 priorities.push({ name: "Forage Base", score: forage, tier: 2, weight: 2 });
 priorities.push({ name: "Habitat / Vegetation", score: habitat, tier: 2, weight: 2 });
 
-/* TIER 3 — Supportive */
+/* Tier 3 */
 priorities.push({ name: "Structure", score: structure, tier: 3, weight: 1 });
 priorities.push({ name: "Competition Control", score: competition, tier: 3, weight: 1 });
 
-/* Weighted score */
-priorities.forEach(p => {
-    p.priorityScore = p.score * p.weight;
-});
+/* Weighted Score */
+priorities.forEach(p => p.priorityScore = p.score * p.weight);
 
-/* Sort lowest → highest (worst → best) */
+/* Sort */
 priorities.sort((a, b) => a.priorityScore - b.priorityScore);
 
-/* Build Priority List HTML */
+/* Priority List */
 let restoreHTML = "";
-for (let i = 0; i < priorities.length; i++) {
+for (let i = 0; i < priorities.length; i++){
     restoreHTML += "<li><strong>" + priorities[i].name +
-                   "</strong> — Score: " + priorities[i].score +
-                   " | Tier " + priorities[i].tier +
-                   " | Weight " + priorities[i].weight +
-                   "</li>";
+    "</strong> — Score: " + priorities[i].score +
+    " | Tier " + priorities[i].tier +
+    " | Weight " + priorities[i].weight +
+    "</li>";
 }
 document.getElementById("restorationList").innerHTML = restoreHTML;
 
-/* EXPLANATION SECTION */
+/* EXPLANATION */
 let explanation = "";
-
-/* Detect foundational failures */
 let badWater = water < 50;
 let badAge = age < 10;
 let badGenetics = bass < 50;
 
-if (badWater || badAge || badGenetics) {
+if(badWater || badAge || badGenetics){
     explanation += "<strong>Foundational Issues Identified:</strong><br>";
 
-    if (badWater) {
-        explanation += "- Water quality is too poor for forage, habitat, or structure improvements to have meaningful impact.<br>";
+    if(badWater){
+        explanation += "- Water quality is too poor for forage or habitat improvements to matter.<br>";
     }
-    if (badAge) {
-        explanation += "- Pond age indicates Old Pond Syndrome. Acidity, muck, and low fertility limit all biological responses.<br>";
+    if(badAge){
+        explanation += "- Pond age indicates Old Pond Syndrome. Fertility and pH limit biological response.<br>";
     }
-    if (badGenetics) {
-        explanation += "- Bass genetics/population structure is weak. Stunted bass cannot utilize forage or habitat effectively.<br>";
+    if(badGenetics){
+        explanation += "- Bass genetics/population structure is weak. Stunted bass cannot utilize forage.<br>";
     }
 
     explanation += "<br><strong>Why this matters:</strong><br>";
-    explanation += "Tier 1 issues must be corrected FIRST. Any work done on Tier 2 or Tier 3 before fixing Tier 1 is basically damage control — or as we say, farts in a whirlwind.<br><br>";
+    explanation += "Tier 1 issues must be corrected FIRST. Anything done on Tier 2 or Tier 3 before fixing Tier 1 is basically damage control — farts in a whirlwind.<br><br>";
 }
-
-/* If no foundational issues */
-else {
+else{
     explanation += "<strong>No Tier 1 blockers detected.</strong><br>";
     explanation += "You can safely improve forage, habitat, structure, and competition in the priority order shown above.<br>";
 }
 
 document.getElementById("restorationExplanation").innerHTML = explanation;
 
+/* RESULTS — SHOW LAST */
+document.getElementById("results").style.display = "block";
+
+document.getElementById("score").innerHTML = total + "/100";
+document.getElementById("agescore").innerHTML = "<strong>Pond Age:</strong> " + age;
+document.getElementById("waterscore").innerHTML = "<strong>Water:</strong> " + water;
+document.getElementById("foragescore").innerHTML = "<strong>Forage:</strong> " + forage;
+document.getElementById("habitatscore").innerHTML = "<strong>Habitat:</strong> " + habitat;
+document.getElementById("structurescore").innerHTML = "<strong>Structure:</strong> " + structure;
+document.getElementById("competitionscore").innerHTML = "<strong>Competition:</strong> " + competition;
+document.getElementById("bassscore").innerHTML = "<strong>Bass Population:</strong> " + bass;
+document.getElementById("grade").innerHTML = "<strong>Grade:</strong> " + grade;
+document.getElementById("factor").innerHTML = "<strong>Main Bottleneck:</strong> " + factor;
+document.getElementById("recommendation").innerHTML =
+"<strong>Recommendations:</strong><br><br>" + recommendations.join("<br><br>");
+document.getElementById("forecast").innerHTML =
+"<strong>Estimated Trophy Bass Potential:</strong> " + trophy + " lb maximum bass";
 
 }
 
