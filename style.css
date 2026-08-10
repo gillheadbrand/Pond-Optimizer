@@ -4,11 +4,20 @@ padding:0;
 box-sizing:border-box;
 }
 
+/* ============================
+   GLOBAL PAGE BRANDING
+   ============================ */
+
 body{
 font-family:Arial,Helvetica,sans-serif;
 background:#eef4ef;
 color:#222;
+border-top:6px solid #b71c1c; /* Gillhead Red Accent */
 }
+
+/* ============================
+   HEADER
+   ============================ */
 
 header{
 background:#f8f7f2;
@@ -16,12 +25,24 @@ color:#0f5d47;
 text-align:center;
 padding:20px;
 border-bottom:3px solid #0f5d47;
+box-shadow:0 4px 0 #b71c1c; /* Red accent line */
 }
 
 header h1{
 font-size:2.6rem;
 margin-bottom:10px;
 }
+
+header p{
+font-size:2.2rem;
+font-weight:800;
+margin-top:15px;
+letter-spacing:1px;
+}
+
+/* ============================
+   CONTAINER + CARDS
+   ============================ */
 
 .container{
 max-width:1000px;
@@ -33,14 +54,21 @@ padding:25px;
 background:white;
 padding:25px;
 border-radius:15px;
-box-shadow:0 4px 12px rgba(0,0,0,.12);
+box-shadow:0 4px 12px rgba(183, 28, 28, 0.15); /* Red shadow */
 margin-bottom:25px;
 }
 
+/* Section Headers */
 h2{
 margin-bottom:20px;
 color:#0f5d47;
+border-bottom:3px solid #b71c1c; /* Red underline */
+padding-bottom:6px;
 }
+
+/* ============================
+   FORM ELEMENTS
+   ============================ */
 
 label{
 display:block;
@@ -56,6 +84,10 @@ border:1px solid #ccc;
 border-radius:8px;
 }
 
+/* ============================
+   BUTTONS
+   ============================ */
+
 button{
 width:100%;
 padding:14px;
@@ -69,7 +101,7 @@ cursor:pointer;
 }
 
 button:hover{
-background:#0a4132;
+background:#b71c1c; /* Red hover */
 }
 
 .info-btn{
@@ -83,6 +115,10 @@ margin-bottom:8px;
 .info-btn:hover{
 background:#dfece6;
 }
+
+/* ============================
+   INFO BOXES
+   ============================ */
 
 .info-box{
 display:none;
@@ -100,6 +136,19 @@ padding-left:20px;
 .info-box li{
 margin-bottom:5px;
 }
+
+/* Red Warning Box Variant */
+.warning-box{
+background:#fbecec;
+border-left:4px solid #b71c1c;
+padding:12px;
+border-radius:6px;
+margin-bottom:12px;
+}
+
+/* ============================
+   SCORE + TEXT
+   ============================ */
 
 .score{
 font-size:70px;
@@ -120,231 +169,242 @@ strong{
 color:#0f5d47;
 }
 
+/* ============================
+   IMAGES
+   ============================ */
+
 .species-image{
-    width:100%;
-    max-width:350px;
-    height:auto;
-    display:block;
-    margin:10px auto;
-    border-radius:10px;
-    border:2px solid #d9d9d9;
+width:100%;
+max-width:350px;
+height:auto;
+display:block;
+margin:10px auto;
+border-radius:10px;
+border:2px solid #d9d9d9;
 }
 
 .logo{
-    display:block;
-    max-width:600px;
-    max-height:400px;
-    width:auto;
-    height:auto;
-    margin:0 auto 10px auto;
-}
-.category-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    margin:10px 0;
+display:block;
+max-width:600px;
+max-height:400px;
+width:auto;
+height:auto;
+margin:0 auto 10px auto;
 }
 
-.optimize-btn{
-    width:auto;
-    margin:0;
-    padding:8px 14px;
-    background:#1b8065;
-    color:white;
-    border:none;
-    border-radius:6px;
-    font-size:14px;
-    font-weight:bold;
+/* ============================
+   CATEGORY ROWS
+   ============================ */
+
+.category-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+margin:10px 0;
 }
+
+/* ============================
+   BUTTONS (OPTIMIZE)
+   ============================ */
+
+.optimize-btn{
+width:auto;
+margin:0;
+padding:8px 14px;
+background:#1b8065;
+color:white;
+border:none;
+border-radius:6px;
+font-size:14px;
+font-weight:bold;
+}
+
+.optimize-btn:hover{
+background:#b71c1c; /* Red hover */
+}
+
+/* ============================
+   HERO SECTION
+   ============================ */
+
 .header-hero{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:20px;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:20px;
 }
 
 .hero-image{
-    width:360px;
-    height:360px;
-    object-fit:cover;
-    border-radius:12px;
+width:360px;
+height:360px;
+object-fit:cover;
+border-radius:12px;
 }
-header p{
-    font-size:2.2rem;
-    font-weight:800;
-    margin-top:15px;
-    letter-spacing:1px;
-}
+
 /* ============================
    MOBILE RESPONSIVE FIXES
    ============================ */
 
 @media (max-width: 600px) {
 
-    header {
-        padding: 15px;
-    }
-
-    header h1 {
-        font-size: 1.8rem;
-    }
-
-    header p {
-        font-size: 1.4rem;
-        margin-top: 10px;
-    }
-
-    /* Fix header hero layout */
-    .header-hero {
-        flex-direction: column;
-        gap: 12px;
-        text-align: center;
-    }
-
-    .hero-image {
-        width: 85%;
-        height: auto;
-        max-width: 280px;
-    }
-
-    /* Logo scaling */
-    .logo {
-        max-width: 80%;
-        height: auto;
-    }
-
-    /* Container padding */
-    .container {
-        padding: 15px;
-    }
-
-    /* Buttons */
-    button,
-    .info-btn,
-    .optimize-btn {
-        width: 100%;
-        font-size: 15px;
-        padding: 12px;
-    }
-
-    /* Category row stacking */
-    .category-row {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-    }
+header {
+    padding: 15px;
 }
+
+header h1 {
+    font-size: 1.8rem;
+}
+
+header p {
+    font-size: 1.4rem;
+    margin-top: 10px;
+}
+
+.header-hero {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+}
+
+.hero-image {
+    width: 85%;
+    height: auto;
+    max-width: 280px;
+}
+
+.logo {
+    max-width: 80%;
+    height: auto;
+}
+
+.container {
+    padding: 15px;
+}
+
+button,
+.info-btn,
+.optimize-btn {
+    width: 100%;
+    font-size: 15px;
+    padding: 12px;
+}
+
+.category-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+}
+}
+
 /* ============================
    MOBILE LAYOUT FIX PATCH
    ============================ */
 
 @media (max-width: 600px) {
 
-    /* Global spacing */
-    body {
-        padding: 0 10px;
-    }
-
-    .container {
-        padding: 15px;
-    }
-
-    /* Card spacing */
-    .card {
-        padding: 18px;
-    }
-
-    /* Header hero fix */
-    .header-hero {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 15px;
-    }
-
-    .hero-image {
-        width: 100%;
-        max-width: 260px;
-        height: auto;
-    }
-
-    /* Logo scaling */
-    .logo {
-        width: 100%;
-        max-width: 300px;
-        height: auto;
-    }
-
-    /* Category row fix */
-    .category-row {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-    }
-
-    /* Buttons full width */
-    button,
-    .info-btn,
-    .optimize-btn {
-        width: 100%;
-        padding: 12px;
-        font-size: 16px;
-    }
-
-    /* Score text scaling */
-    .score {
-        font-size: 48px;
-    }
-
-    /* Species image scaling */
-    .species-image {
-        max-width: 280px;
-        width: 100%;
-    }
+body {
+    padding: 0 10px;
 }
-.main-hero {
+
+.container {
+    padding: 15px;
+}
+
+.card {
+    padding: 18px;
+}
+
+.header-hero {
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    padding: 30px 20px;
-    background: #f8f7f2;
-    border-bottom: 3px solid #0f5d47;
+    gap: 15px;
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+}
+
+.logo {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+}
+
+.category-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+}
+
+button,
+.info-btn,
+.optimize-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+}
+
+.score {
+    font-size: 48px;
+}
+
+.species-image {
+    max-width: 280px;
+    width: 100%;
+}
+}
+
+/* ============================
+   MAIN HERO
+   ============================ */
+
+.main-hero {
+text-align: center;
+padding: 30px 20px;
+background: #f8f7f2;
+border-bottom: 3px solid #0f5d47;
 }
 
 .hero-content {
-    margin-bottom: 20px;
+margin-bottom: 20px;
 }
 
 .hero-tagline {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #0f5d47;
-    margin-top: 10px;
+font-size: 1.4rem;
+font-weight: 600;
+color: #0f5d47;
+margin-top: 10px;
 }
 
 .start-btn {
-    padding: 14px 24px;
-    background: #0f5d47;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 18px;
+padding: 14px 24px;
+background: #0f5d47;
+color: white;
+border: none;
+border-radius: 8px;
+font-size: 1rem;
+font-weight: bold;
+cursor: pointer;
+margin-top: 18px;
 }
 
 .start-btn:hover {
-    background: #0a4132;
+background:#b71c1c; /* Red hover */
 }
 
 @media (max-width: 600px) {
-    .main-hero {
-        padding: 20px 10px;
-    }
+.main-hero {
+    padding: 20px 10px;
+}
 
-    .hero-tagline {
-        font-size: 1.2rem;
-    }
+.hero-tagline {
+    font-size: 1.2rem;
+}
+
 .logo-stack {
     display: flex;
     flex-direction: column;
@@ -359,12 +419,13 @@ header p{
     margin: 0;
 }
 
-    .start-btn {
-        width: 100%;
-    }
+.start-btn {
+    width: 100%;
 }
+}
+
 @media (max-width: 600px) {
-    .logo-stack .hero-tagline {
-        font-size: 1.2rem;
-    }
+.logo-stack .hero-tagline {
+    font-size: 1.2rem;
+}
 }
