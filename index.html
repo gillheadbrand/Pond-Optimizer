@@ -765,6 +765,70 @@ class="species-image">
 
 </div>
 
+    <!-- CONTACT FORM CARD -->
+<div class="card" id="contact">
+    <h2>Contact Us for More Information</h2>
+
+    <p>
+        While this analysis covers a ridiculous amount of data and provides a wholesome,
+        research-backed score, it does not include every possible remediation tactic.
+        Every lake is unique — and some management strategies require professional evaluation.
+    </p>
+
+    <p style="margin-top:10px;">
+        For personalized guidance, advanced remediation plans, or full lake management services,
+        contact our specialist using the form below. The direct email is hidden to prevent spam.
+    </p>
+
+    <div class="warning-box" style="margin-top:12px;">
+        <strong style="color:#b71c1c;">Direct Email Hidden</strong>
+        <p style="margin-top:6px;">
+            Submit the form below and our specialist will respond directly.
+        </p>
+    </div>
+
+    <!-- CONTACT FORM -->
+    <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+        <input type="hidden" name="access_key" value="d30c7cc3-3da9-4b44-913b-38eac7ceacfc">
+
+        <!-- Hidden fields for auto-sending results -->
+        <input type="hidden" id="result_score" name="result_score">
+        <input type="hidden" id="result_grade" name="result_grade">
+        <input type="hidden" id="result_factor" name="result_factor">
+        <input type="hidden" id="result_recommendation" name="result_recommendation">
+        <input type="hidden" id="result_forecast" name="result_forecast">
+        <input type="hidden" id="result_policies" name="result_policies">
+
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Write your message..." required></textarea>
+
+        <button type="submit">Submit Form</button>
+    </form>
+
+    <hr style="margin:20px 0;">
+
+    <h3 style="color:#0f5d47;">Saving Your Results</h3>
+    <p style="margin-top:6px;">
+        To save your score and recommendations, take a screenshot of the Results card or download
+        your full analysis using the button below.
+    </p>
+
+    <button class="info-btn" onclick="downloadResults()">Download My Results</button>
+
+    <ul style="margin-left:20px; margin-top:8px;">
+        <li><strong>Windows:</strong> Windows Key + Shift + S</li>
+        <li><strong>Mac:</strong> Command + Shift + 4</li>
+        <li><strong>iPhone:</strong> Power + Volume Up</li>
+        <li><strong>Android:</strong> Power + Volume Down</li>
+    </ul>
+</div>
+
 <script>
 
 
@@ -1088,6 +1152,95 @@ document.getElementById("recommendation").innerHTML =
 document.getElementById("forecast").innerHTML =
 "<strong>Estimated Trophy Bass Potential:</strong> " + trophy + " lb maximum bass";
 
+}
+/* ============================
+   POLICY & REMEDIATION TEXT
+   ============================ */
+
+const policyText = `
+POLICY & REMEDIATION GUIDANCE
+-----------------------------
+Tier 1 issues (Water Quality, Pond Age, Bass Genetics) must be corrected first.
+These foundational problems limit all other improvements.
+
+Tier 2 issues (Forage Base, Habitat/Veg) improve productivity once Tier 1 is stable.
+
+Tier 3 issues (Structure, Competition) support long-term balance but cannot fix
+Tier 1 or Tier 2 problems alone.
+
+Remediation tactics may include:
+- Agricultural lime (1–2 tons per acre; 2–3 tons for acidic ponds)
+- Aeration or destratification
+- Forage stocking (Threadfin, Shiners, Minnows)
+- Vegetation correction
+- Competition removal
+- Water quality stabilization
+- Habitat enhancement
+
+This analyzer provides a wholesome score but does not include every possible
+remediation tactic. Contact our specialist for full lake management planning.
+`;
+
+/* ============================
+   AUTO-ATTACH RESULTS TO FORM
+   ============================ */
+
+document.querySelector(".contact-form").addEventListener("submit", function() {
+
+    document.getElementById("result_score").value =
+        document.getElementById("score").innerText;
+
+    document.getElementById("result_grade").value =
+        document.getElementById("grade").innerText;
+
+    document.getElementById("result_factor").value =
+        document.getElementById("factor").innerText;
+
+    document.getElementById("result_recommendation").value =
+        document.getElementById("recommendation").innerText;
+
+    document.getElementById("result_forecast").value =
+        document.getElementById("forecast").innerText;
+
+    document.getElementById("result_policies").value = policyText;
+});
+
+/* ============================
+   DOWNLOAD RESULTS AS TEXT FILE
+   ============================ */
+
+function downloadResults() {
+    const score = document.getElementById("score").innerText;
+    const grade = document.getElementById("grade").innerText;
+    const factor = document.getElementById("factor").innerText;
+    const recommendation = document.getElementById("recommendation").innerText;
+    const forecast = document.getElementById("forecast").innerText;
+
+    const content = 
+`LAKE ANALYSIS RESULTS
+----------------------
+Score: ${score}
+Grade: ${grade}
+Primary Bottleneck: ${factor}
+
+Recommendations:
+${recommendation}
+
+Forecast:
+${forecast}
+
+${policyText}
+`;
+
+    const blob = new Blob([content], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "lake-analysis.txt";
+    a.click();
+
+    URL.revokeObjectURL(url);
 }
 
 </script>
