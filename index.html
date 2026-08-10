@@ -597,12 +597,10 @@ class="species-image">
 <h2>Results</h2>
 
 <div id="score" class="score"></div>
+
 <div class="category-row">
     <span id="waterscore"></span>
-    <button class="optimize-btn"
-            onclick="toggleInfo('watertips')">
-        Help Me Optimize
-    </button>
+    <button class="optimize-btn" onclick="toggleInfo('watertips')">Help Me Optimize</button>
 </div>
 
 <div id="watertips" class="info-box">
@@ -616,10 +614,7 @@ class="species-image">
 
 <div class="category-row">
     <span id="foragescore"></span>
-    <button class="optimize-btn"
-            onclick="toggleInfo('foragetips')">
-        Help Me Optimize
-    </button>
+    <button class="optimize-btn" onclick="toggleInfo('foragetips')">Help Me Optimize</button>
 </div>
 
 <div id="foragetips" class="info-box">
@@ -633,10 +628,7 @@ class="species-image">
 
 <div class="category-row">
     <span id="habitatscore"></span>
-    <button class="optimize-btn"
-            onclick="toggleInfo('habitattips')">
-        Help Me Optimize
-    </button>
+    <button class="optimize-btn" onclick="toggleInfo('habitattips')">Help Me Optimize</button>
 </div>
 
 <div id="habitattips" class="info-box">
@@ -649,10 +641,7 @@ class="species-image">
 
 <div class="category-row">
     <span id="structurescore"></span>
-    <button class="optimize-btn"
-            onclick="toggleInfo('structuretips')">
-        Help Me Optimize
-    </button>
+    <button class="optimize-btn" onclick="toggleInfo('structuretips')">Help Me Optimize</button>
 </div>
 
 <div id="structuretips" class="info-box">
@@ -666,10 +655,7 @@ class="species-image">
 
 <div class="category-row">
     <span id="competitionscore"></span>
-    <button class="optimize-btn"
-            onclick="toggleInfo('competitiontips')">
-        Help Me Optimize
-    </button>
+    <button class="optimize-btn" onclick="toggleInfo('competitiontips')">Help Me Optimize</button>
 </div>
 
 <div id="competitiontips" class="info-box">
@@ -682,10 +668,7 @@ class="species-image">
 
 <div class="category-row">
     <span id="bassscore"></span>
-    <button class="optimize-btn"
-            onclick="toggleInfo('basstips')">
-        Help Me Optimize
-    </button>
+    <button class="optimize-btn" onclick="toggleInfo('basstips')">Help Me Optimize</button>
 </div>
 
 <div id="basstips" class="info-box">
@@ -696,12 +679,9 @@ class="species-image">
     </ul>
 </div>
 
-   <div class="category-row">
+<div class="category-row">
     <span id="agescore"></span>
-    <button class="optimize-btn"
-            onclick="toggleInfo('agetips')">
-        Help Me Optimize
-    </button>
+    <button class="optimize-btn" onclick="toggleInfo('agetips')">Help Me Optimize</button>
 </div>
 
 <div id="agetips" class="info-box">
@@ -721,16 +701,18 @@ class="species-image">
 <p id="recommendation"></p>
 <p id="forecast"></p>
 
-     <div id="restorationtips" class="info-box">
+<div class="category-row">
+    <span><strong>Restoration Priority</strong></span>
+    <button class="optimize-btn" onclick="toggleInfo('restorationtips')">Show Priority List</button>
+</div>
+
+<div id="restorationtips" class="info-box">
     <ul id="restorationList"></ul>
     <br>
     <div id="restorationExplanation"></div>
 </div>
 
-</div>
-
-
-</div>
+</div> <!-- CLOSES #results — ONLY ONE -->
 
 <script>
 
