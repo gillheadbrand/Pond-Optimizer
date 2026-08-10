@@ -919,64 +919,77 @@ else if(total < 85){ trophy = 11 + (total - 70) * 0.20; }
 else{ trophy = 14 + (total - 85) * 0.25; }
 trophy = trophy.toFixed(1);
 
-/* RESTORATION PRIORITY SYSTEM */
+/* RESTORATION PRIORITY SYSTEM — Clean Tier-Based Output */
+
 let priorities = [];
 
-/* Tier 1 */
-priorities.push({ name: "Water Quality", score: water, tier: 1, weight: 3 });
-priorities.push({ name: "Pond Age Health", score: age, tier: 1, weight: 3 });
-priorities.push({ name: "Bass Genetics / Population", score: bass, tier: 1, weight: 3 });
+/* Tier 1 — Foundational */
+priorities.push({ name: "Water Quality", score: water, tier: 1 });
+priorities.push({ name: "Pond Age Health", score: age, tier: 1 });
+priorities.push({ name: "Bass Genetics / Population", score: bass, tier: 1 });
 
-/* Tier 2 */
-priorities.push({ name: "Forage Base", score: forage, tier: 2, weight: 2 });
-priorities.push({ name: "Habitat / Vegetation", score: habitat, tier: 2, weight: 2 });
+/* Tier 2 — Productivity */
+priorities.push({ name: "Forage Base", score: forage, tier: 2 });
+priorities.push({ name: "Habitat / Vegetation", score: habitat, tier: 2 });
 
-/* Tier 3 */
-priorities.push({ name: "Structure", score: structure, tier: 3, weight: 1 });
-priorities.push({ name: "Competition Control", score: competition, tier: 3, weight: 1 });
+/* Tier 3 — Supportive */
+priorities.push({ name: "Structure", score: structure, tier: 3 });
+priorities.push({ name: "Competition Control", score: competition, tier: 3 });
 
-/* Weighted Score */
-priorities.forEach(p => p.priorityScore = p.score * p.weight);
+/* Sort lowest → highest score */
+priorities.sort((a, b) => a.score - b.score);
 
-/* Sort */
-priorities.sort((a, b) => a.priorityScore - b.priorityScore);
-
-/* Priority List */
+/* Build clean tier-based list */
 let restoreHTML = "";
-for (let i = 0; i < priorities.length; i++){
-    restoreHTML += "<li><strong>" + priorities[i].name +
-    "</strong> — Score: " + priorities[i].score +
-    " | Tier " + priorities[i].tier +
-    " | Weight " + priorities[i].weight +
-    "</li>";
-}
+
+priorities.forEach(p => {
+    let severity =
+        p.score <= 40 ? "Critical" :
+        p.score <= 60 ? "Needs Improvement" :
+        p.score <= 80 ? "Moderate" :
+        "Healthy";
+
+    restoreHTML += `
+        <li>
+            <strong>${p.name}</strong><br>
+            <span style="color:#555;">
+                Tier ${p.tier} — ${severity}
+            </span>
+        </li>
+        <br>
+    `;
+});
+
 document.getElementById("restorationList").innerHTML = restoreHTML;
 
-/* EXPLANATION */
+/* EXPLANATION — simplified and styled */
 let explanation = "";
+
 let badWater = water < 50;
 let badAge = age < 10;
 let badGenetics = bass < 50;
 
-if(badWater || badAge || badGenetics){
-    explanation += "<strong>Foundational Issues Identified:</strong><br>";
+if (badWater || badAge || badGenetics) {
+    explanation += `
+        <strong>Tier 1 Issues Detected</strong><br>
+        These foundational problems limit everything else in the pond.<br><br>
+    `;
 
-    if(badWater){
-        explanation += "- Water quality is too poor for forage or habitat improvements to matter.<br>";
-    }
-    if(badAge){
-        explanation += "- Pond age indicates Old Pond Syndrome. Fertility and pH limit biological response.<br>";
-    }
-    if(badGenetics){
-        explanation += "- Bass genetics/population structure is weak. Stunted bass cannot utilize forage.<br>";
-    }
+    if (badWater) explanation += "- Water quality is restricting biological productivity.<br>";
+    if (badAge) explanation += "- Pond age is causing fertility and pH decline.<br>";
+    if (badGenetics) explanation += "- Bass genetics/population structure is weak.<br>";
 
-    explanation += "<br><strong>Why this matters:</strong><br>";
-    explanation += "Tier 1 issues must be corrected FIRST. Anything done on Tier 2 or Tier 3 before fixing Tier 1 is basically damage control — farts in a whirlwind.<br><br>";
-}
-else{
-    explanation += "<strong>No Tier 1 blockers detected.</strong><br>";
-    explanation += "You can safely improve forage, habitat, structure, and competition in the priority order shown above.<br>";
+    explanation += `
+        <br><strong>Why This Matters</strong><br>
+        Tier 1 must be corrected first. Improvements to forage, habitat, or structure
+        will have limited impact until foundational issues are addressed.
+    `;
+} else {
+    explanation += `
+        <strong>No Tier 1 Problems Found</strong><br>
+        You can safely improve forage, habitat, structure, and competition in the
+        priority order shown above.
+    `;
 }
 
 document.getElementById("restorationExplanation").innerHTML = explanation;
