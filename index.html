@@ -696,8 +696,8 @@ class="species-image">
     </ul>
 </div>
 
-    <div class="category-row">
-    <span id="agescore"><strong>Pond Age</strong></span>
+   <div class="category-row">
+    <span id="agescore"></span>
     <button class="optimize-btn"
             onclick="toggleInfo('agetips')">
         Help Me Optimize
@@ -705,9 +705,14 @@ class="species-image">
 </div>
 
 <div id="agetips" class="info-box">
-    <div id="ageRec"></div>
+    <ul>
+        <li>Apply agricultural lime every 3–5 years to maintain healthy pH</li>
+        <li>Refresh bass genetics every 10–15 years with F1 or Florida bass</li>
+        <li>Rebuild forage base in older ponds (bluegill, redear, shiners)</li>
+        <li>Add new habitat: brush piles, rock piles, artificial structures</li>
+        <li>Dredge or deepen areas if sediment buildup is severe</li>
+    </ul>
 </div>
-
 
 <hr>
 
@@ -1056,6 +1061,76 @@ document.getElementById("forecast").innerHTML =
 "<strong>Estimated Trophy Bass Potential:</strong> " +
 trophy +
 " lb maximum bass";
+
+/* RESTORATION PRIORITY SYSTEM WITH TIERS + ROOT-CAUSE LOGIC */
+
+let priorities = [];
+
+/* TIER 1 — Foundational */
+priorities.push({ name: "Water Quality", score: water, tier: 1, weight: 3 });
+priorities.push({ name: "Pond Age Health", score: age, tier: 1, weight: 3 });
+priorities.push({ name: "Bass Genetics / Population", score: bass, tier: 1, weight: 3 });
+
+/* TIER 2 — Productivity */
+priorities.push({ name: "Forage Base", score: forage, tier: 2, weight: 2 });
+priorities.push({ name: "Habitat / Vegetation", score: habitat, tier: 2, weight: 2 });
+
+/* TIER 3 — Supportive */
+priorities.push({ name: "Structure", score: structure, tier: 3, weight: 1 });
+priorities.push({ name: "Competition Control", score: competition, tier: 3, weight: 1 });
+
+/* Weighted score */
+priorities.forEach(p => {
+    p.priorityScore = p.score * p.weight;
+});
+
+/* Sort lowest → highest (worst → best) */
+priorities.sort((a, b) => a.priorityScore - b.priorityScore);
+
+/* Build Priority List HTML */
+let restoreHTML = "";
+for (let i = 0; i < priorities.length; i++) {
+    restoreHTML += "<li><strong>" + priorities[i].name +
+                   "</strong> — Score: " + priorities[i].score +
+                   " | Tier " + priorities[i].tier +
+                   " | Weight " + priorities[i].weight +
+                   "</li>";
+}
+document.getElementById("restorationList").innerHTML = restoreHTML;
+
+/* EXPLANATION SECTION */
+let explanation = "";
+
+/* Detect foundational failures */
+let badWater = water < 50;
+let badAge = age < 10;
+let badGenetics = bass < 50;
+
+if (badWater || badAge || badGenetics) {
+    explanation += "<strong>Foundational Issues Identified:</strong><br>";
+
+    if (badWater) {
+        explanation += "- Water quality is too poor for forage, habitat, or structure improvements to have meaningful impact.<br>";
+    }
+    if (badAge) {
+        explanation += "- Pond age indicates Old Pond Syndrome. Acidity, muck, and low fertility limit all biological responses.<br>";
+    }
+    if (badGenetics) {
+        explanation += "- Bass genetics/population structure is weak. Stunted bass cannot utilize forage or habitat effectively.<br>";
+    }
+
+    explanation += "<br><strong>Why this matters:</strong><br>";
+    explanation += "Tier 1 issues must be corrected FIRST. Any work done on Tier 2 or Tier 3 before fixing Tier 1 is basically damage control — or as we say, farts in a whirlwind.<br><br>";
+}
+
+/* If no foundational issues */
+else {
+    explanation += "<strong>No Tier 1 blockers detected.</strong><br>";
+    explanation += "You can safely improve forage, habitat, structure, and competition in the priority order shown above.<br>";
+}
+
+document.getElementById("restorationExplanation").innerHTML = explanation;
+
 
 }
 
