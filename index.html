@@ -1152,6 +1152,8 @@ document.getElementById("recommendation").innerHTML =
 document.getElementById("forecast").innerHTML =
 "<strong>Estimated Trophy Bass Potential:</strong> " + trophy + " lb maximum bass";
 
+attachResultsToForm();
+
 }
 /* ============================
    POLICY & REMEDIATION TEXT
@@ -1184,8 +1186,7 @@ remediation tactic. Contact our specialist for full lake management planning.
 /* ============================
    AUTO-ATTACH RESULTS TO FORM
    ============================ */
-
-document.querySelector(".contact-form").addEventListener("submit", function() {
+function attachResultsToForm() {
 
     document.getElementById("result_score").value =
         document.getElementById("score").innerText;
@@ -1203,7 +1204,7 @@ document.querySelector(".contact-form").addEventListener("submit", function() {
         document.getElementById("forecast").innerText;
 
     document.getElementById("result_policies").value = policyText;
-});
+}
 
 /* ============================
    DOWNLOAD RESULTS AS TEXT FILE
