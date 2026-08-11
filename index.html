@@ -1126,11 +1126,29 @@ document.getElementById("restorationExplanation").innerHTML = explanation;
 
 
 
-/* RESULTS — SHOW LAST */
+/* ============================
+   RESULTS — SHOW LAST
+   ============================ */
+
+/* Prevent NaN errors before formatting */
+age = Number(age) || 0;
+water = Number(water) || 0;
+forage = Number(forage) || 0;
+habitat = Number(habitat) || 0;
+structure = Number(structure) || 0;
+competition = Number(competition) || 0;
+bass = Number(bass) || 0;
+total = Number(total) || 0;
+
+/* Show results + restoration */
 document.getElementById("results").style.display = "block";
 document.getElementById("restoration").style.display = "block";
 
-document.getElementById("score").innerHTML = total.toFixed(0) + "/100";   // ⭐ 1 decimal
+/* Show contact card AFTER audit */
+document.getElementById("contact").style.display = "block";
+
+/* Apply decimal formatting safely */
+document.getElementById("score").innerHTML = total.toFixed(0) + "/100";
 document.getElementById("agescore").innerHTML = "<strong>Pond Age:</strong> " + age.toFixed(0);
 document.getElementById("waterscore").innerHTML = "<strong>Water:</strong> " + water.toFixed(0);
 document.getElementById("foragescore").innerHTML = "<strong>Forage:</strong> " + forage.toFixed(0);
@@ -1148,9 +1166,11 @@ document.getElementById("recommendation").innerHTML =
 document.getElementById("forecast").innerHTML =
 "<strong>Estimated Trophy Bass Potential:</strong> " + trophy.toFixed(1) + " lb maximum bass";
 
+/* Attach results to hidden form fields */
 attachResultsToForm();
 
 }
+
 /* ============================
    POLICY & REMEDIATION TEXT
    ============================ */
@@ -1182,6 +1202,7 @@ remediation tactic. Contact our specialist for full lake management planning.
 /* ============================
    AUTO-ATTACH RESULTS TO FORM
    ============================ */
+
 function attachResultsToForm() {
 
     document.getElementById("result_score").value =
