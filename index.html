@@ -1200,6 +1200,32 @@ remediation tactic. Contact our specialist for full lake management planning.
 `;
 
 /* ============================
+   RESTORATION SUMMARY BUILDER
+   ============================ */
+
+function buildRestorationSummary(priorities) {
+    let summary = "RESTORATION PRIORITY SUMMARY\n-----------------------------\n";
+
+    priorities.forEach(p => {
+        let severity =
+            p.score <= 40 ? "Critical" :
+            p.score <= 60 ? "Needs Improvement" :
+            p.score <= 80 ? "Moderate" :
+            "Healthy";
+
+        summary += 
+`${p.name}
+Tier: ${p.tier}
+Score: ${p.score}
+Severity: ${severity}
+
+`;
+    });
+
+    return summary;
+}
+
+/* ============================
    AUTO-ATTACH RESULTS TO FORM
    ============================ */
 
@@ -1234,12 +1260,32 @@ function downloadResults() {
     const recommendation = document.getElementById("recommendation").innerText;
     const forecast = document.getElementById("forecast").innerText;
 
+    /* Rebuild the same priority list used in the UI */
+    let priorities = [
+        { name: "Water Quality", score: water, tier: 1 },
+        { name: "Pond Age Health", score: age, tier: 1 },
+        { name: "Bass Genetics / Population", score: bass, tier: 1 },
+        { name: "Forage Base", score: forage, tier: 2 },
+        { name: "Habitat / Vegetation", score: habitat, tier: 2 },
+        { name: "Structure", score: structure, tier: 3 },
+        { name: "Competition Control", score: competition, tier: 3 }
+    ];
+
+    priorities.sort((a, b) => {
+        if (a.tier !== b.tier) return a.tier - b.tier;
+        return a.score - b.score;
+    });
+
+    const restorationSummary = buildRestorationSummary(priorities);
+
     const content = 
 `LAKE ANALYSIS RESULTS
 ----------------------
 Score: ${score}
 Grade: ${grade}
 Primary Bottleneck: ${factor}
+
+${restorationSummary}
 
 Recommendations:
 ${recommendation}
@@ -1260,6 +1306,7 @@ ${policyText}
 
     URL.revokeObjectURL(url);
 }
+
 
 </script>
 
