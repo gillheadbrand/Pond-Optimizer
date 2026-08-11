@@ -1129,22 +1129,24 @@ document.getElementById("restorationExplanation").innerHTML = explanation;
 /* RESULTS — SHOW LAST */
 document.getElementById("results").style.display = "block";
 document.getElementById("restoration").style.display = "block";
-document.getElementById("contact").style.display = "block";
 
-document.getElementById("score").innerHTML = total + "/100";
-document.getElementById("agescore").innerHTML = "<strong>Pond Age:</strong> " + age;
-document.getElementById("waterscore").innerHTML = "<strong>Water:</strong> " + water;
-document.getElementById("foragescore").innerHTML = "<strong>Forage:</strong> " + forage;
-document.getElementById("habitatscore").innerHTML = "<strong>Habitat:</strong> " + habitat;
-document.getElementById("structurescore").innerHTML = "<strong>Structure:</strong> " + structure;
-document.getElementById("competitionscore").innerHTML = "<strong>Competition:</strong> " + competition;
-document.getElementById("bassscore").innerHTML = "<strong>Bass Population:</strong> " + bass;
+document.getElementById("score").innerHTML = total.toFixed(0) + "/100";   // ⭐ 1 decimal
+document.getElementById("agescore").innerHTML = "<strong>Pond Age:</strong> " + age.toFixed(0);
+document.getElementById("waterscore").innerHTML = "<strong>Water:</strong> " + water.toFixed(0);
+document.getElementById("foragescore").innerHTML = "<strong>Forage:</strong> " + forage.toFixed(0);
+document.getElementById("habitatscore").innerHTML = "<strong>Habitat:</strong> " + habitat.toFixed(0);
+document.getElementById("structurescore").innerHTML = "<strong>Structure:</strong> " + structure.toFixed(0);
+document.getElementById("competitionscore").innerHTML = "<strong>Competition:</strong> " + competition.toFixed(0);
+document.getElementById("bassscore").innerHTML = "<strong>Bass Population:</strong> " + bass.toFixed(0);
+
 document.getElementById("grade").innerHTML = "<strong>Grade:</strong> " + grade;
 document.getElementById("factor").innerHTML = "<strong>Main Bottleneck:</strong> " + factor;
+
 document.getElementById("recommendation").innerHTML =
 "<strong>Recommendations:</strong><br><br>" + recommendations.join("<br><br>");
+
 document.getElementById("forecast").innerHTML =
-"<strong>Estimated Trophy Bass Potential:</strong> " + trophy + " lb maximum bass";
+"<strong>Estimated Trophy Bass Potential:</strong> " + trophy.toFixed(1) + " lb maximum bass";
 
 attachResultsToForm();
 
