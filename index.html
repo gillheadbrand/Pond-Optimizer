@@ -765,6 +765,29 @@ class="species-image">
 
 </div>
 
+    <div class="card" id="remediationCard" style="display:none;">
+    <h2>Tailored Remediation Plan</h2>
+
+    <p>
+        A customized remediation plan has been generated based on your lake’s biological
+        condition, bottlenecks, and restoration priorities. This plan is provided 
+        <strong>completely free</strong> as part of your Gillhead Lake Analyzer results.
+    </p>
+
+    <p style="margin-top:10px;">
+        If you have any questions about supplies, stocking, water‑quality products, or 
+        full lake‑management services, please send us a message below — we’re happy to help.
+    </p>
+
+    <button class="info-btn" onclick="downloadResults()" type="button">
+        Download Full Results
+    </button>
+
+    <button class="info-btn" onclick="downloadRemediationPlan()" type="button">
+        Download Remediation Plan
+    </button>
+</div>
+
     <!-- CONTACT FORM CARD -->
 <div class="card" id="contact">
     <h2>Contact Us for More Information</h2>
@@ -806,20 +829,6 @@ class="species-image">
 
     <hr style="margin:20px 0;">
 
-    <h3 style="color:#0f5d47;">Saving Your Results</h3>
-    <p style="margin-top:6px;">
-        To save your score and recommendations, take a screenshot of the Results card or download
-        your full analysis using the button below.
-    </p>
-
-    <button class="info-btn" onclick="downloadResults()">Download My Results</button>
-
-    <ul style="margin-left:20px; margin-top:8px;">
-        <li><strong>Windows:</strong> Windows Key + Shift + S</li>
-        <li><strong>Mac:</strong> Command + Shift + 4</li>
-        <li><strong>iPhone:</strong> Power + Volume Up</li>
-        <li><strong>Android:</strong> Power + Volume Down</li>
-    </ul>
 </div>
 
 <script>
@@ -1144,6 +1153,9 @@ total = Number(total) || 0;
 document.getElementById("results").style.display = "block";
 document.getElementById("restoration").style.display = "block";
 
+/* Show remediation plan card */
+document.getElementById("remediationCard").style.display = "block";
+
 /* Show contact card AFTER audit */
 document.getElementById("contact").style.display = "block";
 
@@ -1226,6 +1238,68 @@ Severity: ${severity}
 }
 
 /* ============================
+   REMEDIATION PLAN BUILDER
+   ============================ */
+
+function buildRemediationPlan(priorities) {
+    let plan = "TAILORED REMEDIATION PLAN\n-----------------------------\n";
+
+    priorities.forEach(p => {
+        let severity =
+            p.score <= 40 ? "Critical" :
+            p.score <= 60 ? "Needs Improvement" :
+            p.score <= 80 ? "Moderate" :
+            "Healthy";
+
+        plan += `${p.name} (Tier ${p.tier}) — ${severity}\n`;
+
+        if (severity === "Critical") {
+            if (p.name === "Water Quality") {
+                plan += "- Apply agricultural lime at 2–3 tons per acre.\n";
+                plan += "- Add aeration or destratification.\n";
+                plan += "- Test alkalinity and pH.\n";
+            }
+            if (p.name === "Pond Age Health") {
+                plan += "- Add 2–3 tons/acre lime.\n";
+                plan += "- Add organic matter.\n";
+            }
+            if (p.name === "Bass Genetics / Population") {
+                plan += "- Remove 20–40 lbs of small bass per acre.\n";
+                plan += "- Stock 25–50 F1 or Florida bass per acre.\n";
+            }
+            if (p.name === "Competition Control") {
+                plan += "- Remove crappie, bullheads, or green sunfish.\n";
+            }
+        }
+
+        if (severity === "Needs Improvement") {
+            if (p.name === "Forage Base") {
+                plan += "- Stock 300–500 bluegill per acre.\n";
+                plan += "- Add 5–10 lbs/acre golden shiners.\n";
+            }
+            if (p.name === "Habitat / Vegetation") {
+                plan += "- Add 20–40% habitat coverage.\n";
+            }
+            if (p.name === "Structure") {
+                plan += "- Add 10–15 structure clusters.\n";
+            }
+        }
+
+        if (severity === "Moderate") {
+            plan += "- Maintain current management.\n";
+        }
+
+        if (severity === "Healthy") {
+            plan += "- No action required.\n";
+        }
+
+        plan += "\n";
+    });
+
+    return plan;
+}
+
+/* ============================
    AUTO-ATTACH RESULTS TO FORM
    ============================ */
 
@@ -1260,7 +1334,6 @@ function downloadResults() {
     const recommendation = document.getElementById("recommendation").innerText;
     const forecast = document.getElementById("forecast").innerText;
 
-    /* Rebuild the same priority list used in the UI */
     let priorities = [
         { name: "Water Quality", score: water, tier: 1 },
         { name: "Pond Age Health", score: age, tier: 1 },
@@ -1307,6 +1380,45 @@ ${policyText}
     URL.revokeObjectURL(url);
 }
 
+/* ============================
+   DOWNLOAD REMEDIATION PLAN
+   ============================ */
+
+function downloadRemediationPlan() {
+
+    let priorities = [
+        { name: "Water Quality", score: water, tier: 1 },
+        { name: "Pond Age Health", score: age, tier: 1 },
+        { name: "Bass Genetics / Population", score: bass, tier: 1 },
+        { name: "Forage Base", score: forage, tier: 2 },
+        { name: "Habitat / Vegetation", score: habitat, tier: 2 },
+        { name: "Structure", score: structure, tier: 3 },
+        { name: "Competition Control", score: competition, tier: 3 }
+    ];
+
+    priorities.sort((a, b) => {
+        if (a.tier !== b.tier) return a.tier - b.tier;
+        return a.score - b.score;
+    });
+
+    const remediationPlan = buildRemediationPlan(priorities);
+
+    const content = 
+`CUSTOM REMEDIATION PLAN
+------------------------
+${remediationPlan}
+`;
+
+    const blob = new Blob([content], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "lake-remediation-plan.txt";
+    a.click();
+
+    URL.revokeObjectURL(url);
+}
 
 </script>
 
